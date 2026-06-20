@@ -15,7 +15,8 @@ verified on-device (see "Already done" below).
 - ✅ P2P (Phase 2): delegated inference behind `--delegate`, `fallbackToLocal` → can't break core. Verified (provider announced on DHT; fallback produced full report).
 - ✅ No-cloud guard (`npm run check:no-cloud`), 13 unit tests (`npm test`), GitHub Actions CI.
 - ✅ Apache-2.0 LICENSE, `.gitignore` (no secrets), synthetic sample data, README.
-- ✅ 6 local commits on `main`. **NOT pushed to GitHub yet** (no remote configured) → see task 6.
+- ✅ Pushed & public: **https://github.com/tang-vu/coldwire** (Apache-2.0).
+- ✅ Live showcase deployed: **https://coldwire-edge-ai.vercel.app** (static snapshot, no inference on the page).
 
 ### Tested-on snapshot (for the evidence bundle)
 
@@ -67,7 +68,7 @@ Cut it and say so rather than show a broken demo.)
 ### 4. Verify the README reproduces from ZERO
 On a clean clone / fresh directory (ideally a different machine):
 ```bash
-git clone <your-repo-url> && cd coldwire
+git clone https://github.com/tang-vu/coldwire.git && cd coldwire
 npm install
 npm run smoke && npm run coldwire
 ```
@@ -85,14 +86,8 @@ Tell the "why edge" story, tight:
 / "Prizes & Judging" tab before recording. Upload (YouTube unlisted or similar).
 
 ### 6. Make the GitHub repo PUBLIC with Apache-2.0
-Repo is local only right now. Create + push:
-```bash
-# with GitHub CLI:
-gh repo create coldwire --public --source=. --remote=origin --push
-# or manually: create an empty public repo, then:
-#   git remote add origin <url> && git push -u origin main
-```
-Then: set the License to **Apache-2.0** in the repo's About sidebar (GitHub
+✅ DONE — pushed & public at **https://github.com/tang-vu/coldwire**. Remaining checks:
+set the License to **Apache-2.0** in the repo's About sidebar (GitHub
 auto-detects the LICENSE file — confirm the badge shows). Scrub secrets:
 `git log --stat` and confirm no `.env`/keys ever committed (sample data is
 synthetic, safe). `.gitignore` already excludes secrets + model cache.

@@ -1,5 +1,9 @@
 # Coldwire — a 100% on-device private alpha agent
 
+[![CI](https://github.com/tang-vu/coldwire/actions/workflows/ci.yml/badge.svg)](https://github.com/tang-vu/coldwire/actions/workflows/ci.yml)
+[![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-1F46FF.svg)](./LICENSE)
+[![Live demo](https://img.shields.io/badge/demo-coldwire--edge--ai.vercel.app-1F46FF.svg)](https://coldwire-edge-ai.vercel.app)
+
 > Your watchlist, open positions and strategy never leave your machine.
 > Coldwire reads your **private** trader notes and produces a structured signal
 > report using **local inference + RAG** via [`@qvac/sdk`](https://docs.qvac.tether.io).
@@ -62,7 +66,7 @@ agent never contradicts your own stated `Bias:` line.
 Requirements: **Node ≥ 22.17**, npm ≥ 10.9. (Tested on Node v24.14.1.)
 
 ```bash
-git clone <this-repo> && cd coldwire
+git clone https://github.com/tang-vu/coldwire.git && cd coldwire
 npm install
 
 # 1) Smoke test — confirms the toolchain + on-device model load + streaming
