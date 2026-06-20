@@ -1,0 +1,22 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - run: npm ci
+      # Typecheck the whole project against the real @qvac/sdk types.
+      - run: npm run typecheck
+      # Hard gate: prove there are no cloud inference endpoints / SDKs in source.
+      - run: npm run check:no-cloud
+      # Fast unit tests (pure logic + the no-cloud guard). No model download needed.
+      - run: npm test

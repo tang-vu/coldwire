@@ -17,6 +17,7 @@
     "serve": "node src/server/web-server.ts",
     "provider": "node src/p2p/coldwire-provider.ts",
     "check:no-cloud": "node scripts/verify-no-cloud-endpoints.ts",
+    "test": "node --test \"test/**/*.test.ts\"",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
