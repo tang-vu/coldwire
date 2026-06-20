@@ -26,6 +26,7 @@ export async function writeProofArtifacts(report: SignalReport, dir = "proof"): 
     generatedAt: report.generatedAt,
     llmModel: report.llmModel,
     embedModel: report.embedModel,
+    delegatedTo: report.proof.delegatedTo ?? null,
     inferenceStats: report.proof.stats,
     profiler: profilerJSON(),
   };
@@ -41,6 +42,9 @@ export function renderProof(report: SignalReport): string {
   lines.push(`host:        ${report.proof.host}`);
   lines.push(`llm:         ${report.llmModel}`);
   lines.push(`embeddings:  ${report.embedModel}`);
+  if (report.proof.delegatedTo) {
+    lines.push(`delegated:   LLM offloaded to peer ${report.proof.delegatedTo} over encrypted P2P (no server). Embeddings + RAG stayed local.`);
+  }
   lines.push(`note:        ${PROOF_NOTE}`);
   lines.push("");
   lines.push("per-call telemetry (proves which local backend ran each call):");

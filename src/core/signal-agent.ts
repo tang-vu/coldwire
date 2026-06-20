@@ -17,6 +17,7 @@ import {
   profilerSummary,
   generateStructured,
   type ModelProgress,
+  type DelegateConfig,
 } from "./qvac-models.ts";
 import {
   readPrivateDocs,
@@ -60,6 +61,8 @@ export interface AgentEvents {
 export interface AgentOptions {
   dataDir: string;
   events?: AgentEvents;
+  /** Phase 2: offload the LLM to a peer over P2P (always falls back to local). */
+  delegate?: DelegateConfig;
 }
 
 const snippet = (c: RetrievedChunk): string =>
@@ -71,8 +74,12 @@ export async function generateSignalReport(opts: AgentOptions): Promise<SignalRe
 
   events?.onPhase?.("Loading embedding model (GTE-large, 1024-d)");
   const embedId = await loadEmbedModel((p) => events?.onModelDownload?.("embeddings", p));
-  events?.onPhase?.("Loading LLM (Llama 3.2 1B Instruct)");
-  const llmId = await loadLLM((p) => events?.onModelDownload?.("llm", p));
+  events?.onPhase?.(
+    opts.delegate
+      ? "Loading LLM (Llama 3.2 1B) — delegating to peer over P2P, local fallback on"
+      : "Loading LLM (Llama 3.2 1B Instruct)",
+  );
+  const llmId = await loadLLM((p) => events?.onModelDownload?.("llm", p), opts.delegate);
 
   try {
     events?.onPhase?.("Reading private docs");
@@ -164,6 +171,9 @@ export async function generateSignalReport(opts: AgentOptions): Promise<SignalRe
         host: os.hostname(),
         stats,
         profilerSummary: profilerSummary(),
+        delegatedTo: opts.delegate
+          ? `${opts.delegate.providerPublicKey.slice(0, 12)}…`
+          : undefined,
       },
     };
   } finally {

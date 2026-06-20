@@ -19,15 +19,19 @@ interface CliArgs {
   json: boolean;
   proof: boolean;
   help: boolean;
+  delegate?: string;
 }
 
 function parseArgs(argv: string[]): CliArgs {
   const args: CliArgs = { dataDir: DEFAULT_DATA_DIR, json: false, proof: true, help: false };
+  const envDelegate = process.env.COLDWIRE_DELEGATE;
+  if (envDelegate) args.delegate = envDelegate;
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
     if (a === "--data") args.dataDir = argv[++i] ?? DEFAULT_DATA_DIR;
     else if (a === "--json") args.json = true;
     else if (a === "--no-proof") args.proof = false;
+    else if (a === "--delegate") args.delegate = argv[++i];
     else if (a === "--help" || a === "-h") args.help = true;
   }
   return args;
@@ -39,10 +43,12 @@ Usage:
   node src/cli/coldwire-cli.ts [options]
 
 Options:
-  --data <dir>   Directory of private .md/.txt docs (default: ${DEFAULT_DATA_DIR})
-  --json         Print the raw JSON SignalReport instead of the formatted view
-  --no-proof     Skip writing the on-device proof artifact
-  -h, --help     Show this help
+  --data <dir>       Directory of private .md/.txt docs (default: ${DEFAULT_DATA_DIR})
+  --json             Print the raw JSON SignalReport instead of the formatted view
+  --no-proof         Skip writing the on-device proof artifact
+  --delegate <key>   P2P: offload the LLM to a peer's public key (falls back to local).
+                     Start a peer with: npm run provider
+  -h, --help         Show this help
 `;
 
 function downloadReporter() {
@@ -68,6 +74,9 @@ async function main(): Promise<void> {
 
   const report = await generateSignalReport({
     dataDir: args.dataDir,
+    delegate: args.delegate
+      ? { providerPublicKey: args.delegate, timeout: 30_000, fallbackToLocal: true }
+      : undefined,
     events: {
       onPhase: (phase) => !args.json && process.stderr.write(`▸ ${phase}\n`),
       onAsset: (ticker, i, total) =>

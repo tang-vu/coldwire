@@ -19,13 +19,26 @@ export interface ModelProgress {
 
 type ProgressCb = (p: ModelProgress) => void;
 
-/** Load the Llama 3.2 1B instruct model used for reasoning. Returns its modelId. */
-export async function loadLLM(onProgress?: ProgressCb): Promise<string> {
-  return await loadModel({
+/** Optional P2P delegation for the LLM (Phase 2). Always falls back to local. */
+export interface DelegateConfig {
+  providerPublicKey: string;
+  timeout?: number;
+  fallbackToLocal?: boolean;
+}
+
+/**
+ * Load the Llama 3.2 1B instruct model used for reasoning. Returns its modelId.
+ * When `delegate` is provided, the completion is offloaded to a peer over P2P;
+ * `fallbackToLocal` guarantees local execution if the peer is unreachable.
+ */
+export async function loadLLM(onProgress?: ProgressCb, delegate?: DelegateConfig): Promise<string> {
+  const options: Record<string, unknown> = {
     modelSrc: LLAMA_3_2_1B_INST_Q4_0,
     modelConfig: { ctx_size: LLM_CTX_SIZE },
     onProgress,
-  });
+  };
+  if (delegate) options.delegate = { fallbackToLocal: true, ...delegate };
+  return await loadModel(options as Parameters<typeof loadModel>[0]);
 }
 
 /** Load the GTE-large embedding model (1024-d) used for RAG. Returns its modelId. */

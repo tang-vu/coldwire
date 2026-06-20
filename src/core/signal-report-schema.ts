@@ -68,6 +68,8 @@ export interface SignalReport {
     host: string;
     stats: InferenceStat[];
     profilerSummary: string;
+    /** Set when the LLM was offloaded to a peer over P2P (truncated public key). */
+    delegatedTo?: string;
   };
 }
 
