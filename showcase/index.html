@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Coldwire — on-device private alpha agent</title>
+<meta name="description" content="A 100% on-device private alpha agent for crypto traders. Local inference + RAG via @qvac/sdk. Zero cloud, $0 inference, works offline." />
+<style>
+  :root{
+    --bg:#070a10; --bg2:#0d1119; --panel:#121826; --panel2:#19202f; --line:#222c3e;
+    --ink:#e9edf5; --dim:#8a93a8; --faint:#5c6678;
+    --acc:#3ddc91; --acc2:#1f7a55; --warn:#f5c451; --bad:#f06a6a; --blue:#6aa6ff;
+    --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+    --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{background:
+      radial-gradient(900px 500px at 80% -10%, rgba(61,220,145,.10), transparent 60%),
+      radial-gradient(700px 500px at 0% 0%, rgba(106,166,255,.08), transparent 55%),
+      var(--bg);
+    color:var(--ink);font-family:var(--sans);line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:980px;margin:0 auto;padding:30px 20px 90px}
+  a{color:var(--acc);text-decoration:none}
+  a:hover{text-decoration:underline}
+
+  .topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:34px}
+  .brand{display:flex;align-items:center;gap:11px;font-weight:800;font-size:18px;letter-spacing:-.3px}
+  .dot{width:11px;height:11px;border-radius:50%;background:var(--acc);box-shadow:0 0 0 4px rgba(61,220,145,.16);animation:pulse 2.4s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.45}}
+  .src-link{font-family:var(--mono);font-size:12.5px;color:var(--dim);border:1px solid var(--line);padding:7px 12px;border-radius:8px}
+
+  .hero h1{font-size:clamp(30px,6vw,50px);line-height:1.05;letter-spacing:-1.4px;margin:.1em 0 .15em}
+  .hero h1 .g{background:linear-gradient(90deg,#3ddc91,#6aa6ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero p{font-size:clamp(15px,2.4vw,19px);color:var(--dim);max-width:64ch;margin:0 0 22px}
+  .chips{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+  .chip{display:inline-flex;align-items:center;gap:8px;background:var(--panel);border:1px solid var(--line);border-radius:99px;padding:8px 14px;font-size:13px;font-weight:600}
+  .chip b{color:var(--acc)}
+  .chip .mono{font-family:var(--mono);color:var(--ink)}
+
+  .note{margin-top:18px;background:linear-gradient(0deg,rgba(245,196,81,.06),rgba(245,196,81,.06));border:1px solid #43391d;color:#e7d9b0;
+    border-radius:10px;padding:11px 14px;font-size:13px}
+  .note b{color:var(--warn)}
+
+  section{margin-top:34px}
+  .h{display:flex;align-items:baseline;gap:10px;margin:0 0 14px}
+  .h h2{font-size:20px;letter-spacing:-.3px;margin:0}
+  .h .meta{font-family:var(--mono);font-size:12px;color:var(--faint)}
+
+  .panel{background:linear-gradient(180deg,var(--panel),var(--bg2));border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+  .flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-family:var(--mono);font-size:12.5px;color:var(--dim)}
+  .flow .b{background:var(--panel2);border:1px solid var(--line);border-radius:7px;padding:6px 10px;color:var(--ink)}
+  .flow .ar{color:var(--acc)}
+
+  .pf-sum{font-size:15.5px}
+  .breaches{list-style:none;padding:0;margin:14px 0 0;display:grid;gap:8px}
+  .breaches li{display:flex;gap:10px;align-items:flex-start;background:rgba(240,106,106,.06);border:1px solid #3a2030;border-radius:9px;padding:10px 12px;font-size:14px}
+  .breaches li::before{content:"⚠";color:var(--bad);font-size:14px;line-height:1.4}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+  .card{background:linear-gradient(180deg,var(--panel),var(--bg2));border:1px solid var(--line);border-radius:13px;padding:15px 16px}
+  .card-h{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-bottom:6px}
+  .tk{font-family:var(--mono);font-weight:800;font-size:19px}
+  .badge{font-size:10.5px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;padding:3px 9px;border-radius:99px}
+  .b-bullish,.b-accumulate{background:rgba(61,220,145,.14);color:var(--acc)}
+  .b-bearish,.b-reduce,.b-avoid{background:rgba(240,106,106,.14);color:var(--bad)}
+  .b-neutral{background:rgba(245,196,81,.14);color:var(--warn)}
+  .conv{margin-left:auto;font-family:var(--mono);font-size:12px;color:var(--dim);display:flex;align-items:center;gap:7px}
+  .bar{letter-spacing:1px}
+  .bar .on{color:var(--acc)} .bar.r .on{color:var(--bad)} .bar.n .on{color:var(--warn)}
+  .f{margin-top:9px}
+  .f .k{font-size:10.5px;text-transform:uppercase;letter-spacing:.5px;color:var(--faint)}
+  .f .v{font-size:13.5px;color:var(--ink)}
+  .srcline{margin-top:10px;font-size:11.5px;color:var(--faint);font-style:italic;border-top:1px dashed var(--line);padding-top:8px}
+
+  .proof-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px}
+  @media(max-width:640px){.proof-grid{grid-template-columns:1fr}}
+  .kv{font-family:var(--mono);font-size:12.5px;color:var(--dim)}
+  .kv b{color:var(--ink)} .kv .ok{color:var(--acc)}
+  table{width:100%;border-collapse:collapse;margin-top:12px;font-family:var(--mono);font-size:12px}
+  th,td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--line)}
+  th{color:var(--faint);font-weight:600;text-transform:uppercase;font-size:10.5px;letter-spacing:.4px}
+  td .ok{color:var(--acc)}
+  .hashes{margin-top:12px;font-family:var(--mono);font-size:11px;color:var(--faint);word-break:break-all}
+  .hashes b{color:var(--dim)}
+  pre.prof{margin-top:12px;background:#0a0e15;border:1px solid var(--line);border-radius:9px;padding:12px;overflow:auto;font-family:var(--mono);font-size:11.5px;color:var(--dim)}
+
+  footer{margin-top:40px;border-top:1px solid var(--line);padding-top:18px;color:var(--faint);font-size:13px;display:flex;gap:14px;flex-wrap:wrap;justify-content:space-between}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar">
+    <div class="brand"><span class="dot"></span> Coldwire</div>
+    <a class="src-link" href="https://github.com/" data-repo>★ Source · Apache-2.0</a>
+  </div>
+
+  <header class="hero">
+    <h1>Your alpha never leaves <span class="g">your device.</span></h1>
+    <p>A 100%-on-device private alpha agent for crypto traders. It reads your private
+       watchlist, positions and strategy and produces a structured signal report using
+       <b>local inference + RAG via @qvac/sdk</b>.</p>
+    <div class="chips">
+      <span class="chip">🔒 Private — notes stay local</span>
+      <span class="chip">✈️ Works <b>offline</b></span>
+      <span class="chip">💸 <b>$0</b> inference, no API keys</span>
+      <span class="chip">⚡ <span class="mono" id="chip-dev">on-device</span></span>
+    </div>
+    <div class="note">
+      <b>This page is a static snapshot.</b> The report below was generated
+      <b>100% on-device</b> by Coldwire and pasted here — <b>no inference or API call
+      runs on this page</b>. Run the real agent on your own hardware (it works with the
+      network off): see the source repo.
+    </div>
+  </header>
+
+  <section>
+    <div class="h"><h2>How it was generated</h2></div>
+    <div class="panel">
+      <div class="flow">
+        <span class="b">private .md notes</span><span class="ar">▸</span>
+        <span class="b">GTE-large embeddings</span><span class="ar">▸</span>
+        <span class="b">local RAG (HyperDB)</span><span class="ar">▸</span>
+        <span class="b">Llama 3.2 1B · JSON-schema constrained</span><span class="ar">▸</span>
+        <span class="b">bias-grounding</span><span class="ar">▸</span>
+        <span class="b">signal report</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="h"><h2>Portfolio</h2><span class="meta" id="gen-meta"></span></div>
+    <div class="panel">
+      <div class="pf-sum" id="pf-summary"></div>
+      <ul class="breaches" id="pf-breaches"></ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="h"><h2>Signals</h2><span class="meta" id="sig-meta"></span></div>
+    <div class="grid" id="signals"></div>
+  </section>
+
+  <section>
+    <div class="h"><h2>On-device proof</h2><span class="meta">verifiable · not a cloud call</span></div>
+    <div class="panel">
+      <div class="proof-grid">
+        <div class="kv">host: <b id="p-host"></b></div>
+        <div class="kv">backend: <b class="ok" id="p-dev"></b></div>
+        <div class="kv">llm: <b id="p-llm"></b></div>
+        <div class="kv">embeddings: <b id="p-emb"></b></div>
+      </div>
+      <table>
+        <thead><tr><th>inference call</th><th>device</th><th>tokens/sec</th><th>generated</th></tr></thead>
+        <tbody id="p-stats"></tbody>
+      </table>
+      <div class="hashes">
+        <b>model sha256 (checksum-validated by the SDK):</b><br>
+        Llama-3.2-1B-Instruct-Q4_0.gguf — 66BFBB2D48BDB77CD56BD03EF820DEFF3C4A74B1A09DE3B917AE13E72C1A70C2<br>
+        gte-large_fp16.gguf — 939F1FB3FCC70F2A250A7E7AD7C2FBDC1397D46F9A8055D053E451829C5293FB
+      </div>
+      <pre class="prof" id="p-prof"></pre>
+    </div>
+  </section>
+
+  <footer>
+    <span>Coldwire · open source · Apache-2.0 · QVAC "Unleash Edge AI"</span>
+    <span>All inference on-device via @qvac/sdk · zero cloud</span>
+  </footer>
+</div>
+
+<script id="report-data" type="application/json">{
+  "generatedAt": "2026-06-20T22:02:28.782Z",
+  "llmModel": "LLAMA_3_2_1B_INST_Q4_0",
+  "embedModel": "GTE_LARGE_FP16",
+  "dataDir": "data/sample",
+  "assetCount": 6,
+  "portfolio": {
+    "portfolioSummary": "I'm cautious about my portfolio, prioritizing capital preservation over upside growth. I've set strict limits on risk and exposure.",
+    "keyRisks": [
+      "SOL is 36% of NAV, above my 25% single-alt cap",
+      "total alt exposure 53.7% > 50% cap",
+      "ARB bought into an unlock, violating my own rule"
+    ]
+  },
+  "signals": [
+    {
+      "stance": "bullish",
+      "conviction": 2,
+      "thesis": "BTC (Bitcoin) is a strong candidate for accumulation due to its constructive bias and the potential for a significant price increase.",
+      "risk": "- The single biggest risk or what invalidates this idea is the dominance of BTC, which could lead to an oversold market.",
+      "suggestedAction": "Reduce position size by 2% to 25% of NAV.",
+      "asset": "BTC",
+      "sources": [
+        "## Position 2 — BTC (long spot) - Size: 0.65 BTC, avg entry 61,200, current ~68,000. Unrealized +11.1%. - Weig",
+        "scoring > and risk commentary in MY rules — not generic advice. ## Objective Grow NAV through a full crypto cy",
+        "Source: positions.md # Open Positions — SYNTHETIC SAMPLE DATA (not real) > Fake portfolio. This is the kind of",
+        "Source: strategy.md # Strategy & Risk Notes — SYNTHETIC SAMPLE DATA (not real) > My personal trading framework"
+      ]
+    },
+    {
+      "stance": "neutral",
+      "conviction": 2,
+      "thesis": "ETH/BTC ratio basing around 0.046; staking yield ~3.2%. The current support and resistance levels are crucial in determining the next move.",
+      "risk": "-5.0% (unrealized -5.0%)",
+      "suggestedAction": "Reduce position size to 1.5 ETH, target stop at 2950 / 2700.",
+      "asset": "ETH",
+      "sources": [
+        "## Position 3 — ETH (long spot) - Size: 4.0 ETH, avg entry 3,420, current ~3,250. Unrealized -5.0%. - Weight: ",
+        "Source: watchlist.md # Watchlist — SYNTHETIC SAMPLE DATA (not real) > Fake data shipped so Coldwire runs repro",
+        "Source: positions.md # Open Positions — SYNTHETIC SAMPLE DATA (not real) > Fake portfolio. This is the kind of",
+        "scoring > and risk commentary in MY rules — not generic advice. ## Objective Grow NAV through a full crypto cy"
+      ]
+    },
+    {
+      "stance": "reduce",
+      "conviction": 1,
+      "thesis": "SOL is a high-beta long asset with strong conviction, but its oversized position and concentration risk flag it as a bearish idea.",
+      "risk": "- Oversized position (36% of NAV) and concentration risk flag make this an avoidable idea.",
+      "suggestedAction": "Reduce the position to 25% of NAV by taking 25% off at 190, then trim winners that breach the single-position cap.",
+      "asset": "SOL",
+      "sources": [
+        "## Position 1 — SOL (long spot) - Size: 220 SOL, avg entry 128.40, current ~165. Unrealized +28.6%. - Weight: ",
+        "scoring > and risk commentary in MY rules — not generic advice. ## Objective Grow NAV through a full crypto cy",
+        "Source: positions.md # Open Positions — SYNTHETIC SAMPLE DATA (not real) > Fake portfolio. This is the kind of",
+        "Source: strategy.md # Strategy & Risk Notes — SYNTHETIC SAMPLE DATA (not real) > My personal trading framework"
+      ]
+    },
+    {
+      "stance": "accumulate",
+      "conviction": 3,
+      "thesis": "LINK is a narrative-driven asset with a strong bias towards accumulation on weakness.",
+      "risk": "CCIP adoption + any TradFi tokenization headline pumps it, and its slow mover nature.",
+      "suggestedAction": "Reduce the position size to 25% of NAV and add a stop-loss at 18k.",
+      "asset": "LINK",
+      "sources": [
+        "## LINK — Chainlink - Bias: accumulate on weakness. Slow mover, narrative-driven. - Catalyst watch: CCIP adopt",
+        "scoring > and risk commentary in MY rules — not generic advice. ## Objective Grow NAV through a full crypto cy",
+        "Source: positions.md # Open Positions — SYNTHETIC SAMPLE DATA (not real) > Fake portfolio. This is the kind of",
+        "Source: strategy.md # Strategy & Risk Notes — SYNTHETIC SAMPLE DATA (not real) > My personal trading framework"
+      ]
+    },
+    {
+      "stance": "neutral",
+      "conviction": 3,
+      "thesis": "The ARB (Arbitrum) asset is a strong candidate for growth, driven by its strong tech fundamentals and potential catalysts.",
+      "risk": "-17.0% - The unrealized loss of ~$1,700 on the current position breaches my single-position cap, making it necessary to cut or hold to 0.62.",
+      "suggestedAction": "Reduce ARB to 0.62.",
+      "asset": "ARB",
+      "sources": [
+        "## Position 4 — ARB (tactical long) - Size: 6,000 ARB, avg entry 0.94, current ~0.78. Unrealized -17.0%. - Wei",
+        "; resistance 18, then 22. - Note: staking v0.2 locked supply helps. Low float games on exchanges cause violent",
+        "scoring > and risk commentary in MY rules — not generic advice. ## Objective Grow NAV through a full crypto cy",
+        "~3,250. Unrealized -5.0%. - Weight: 13% of NAV. - Stop: 2,700 weekly close. Thesis intact but underperforming;"
+      ]
+    },
+    {
+      "stance": "avoid",
+      "conviction": 2,
+      "thesis": "DOGE pumping is a late-cycle risk signal, not an entry point. If DOGE leads, I will trim everything.",
+      "risk": "DOGE leading to a flush of longs and shorts on ARB, which could lead to a significant sell-off in BTC and other alts.",
+      "suggestedAction": "I will de-risk into BTC/cash during alt euphoria (DOGE leading, funding rates spiking).",
+      "asset": "DOGE",
+      "sources": [
+        "## DOGE — Dogecoin - Bias: avoid / pure sentiment play. On watchlist only to gauge retail risk appetite. - Not",
+        "; resistance 18, then 22. - Note: staking v0.2 locked supply helps. Low float games on exchanges cause violent",
+        "scoring > and risk commentary in MY rules — not generic advice. ## Objective Grow NAV through a full crypto cy",
+        "concentration is the silent killer. - Never average down on a TACTICAL trade (only on long-term sleeves: BTC, "
+      ]
+    }
+  ],
+  "proof": {
+    "onDevice": true,
+    "host": "DESKTOP-1A6OPC9",
+    "stats": [
+      {
+        "label": "signal:BTC",
+        "backendDevice": "gpu",
+        "tokensPerSecond": 17.167934969986202,
+        "promptTokens": 2058,
+        "generatedTokens": 97,
+        "timeToFirstTokenMs": 8752.136
+      },
+      {
+        "label": "signal:ETH",
+        "backendDevice": "gpu",
+        "tokensPerSecond": 16.683639164956325,
+        "promptTokens": 2265,
+        "generatedTokens": 103,
+        "timeToFirstTokenMs": 9404.449
+      },
+      {
+        "label": "signal:SOL",
+        "backendDevice": "gpu",
+        "tokensPerSecond": 16.754312348682898,
+        "promptTokens": 2076,
+        "generatedTokens": 111,
+        "timeToFirstTokenMs": 8757.596
+      },
+      {
+        "label": "signal:LINK",
+        "backendDevice": "gpu",
+        "tokensPerSecond": 17.02144779792756,
+        "promptTokens": 1973,
+        "generatedTokens": 88,
+        "timeToFirstTokenMs": 8658.982
+      },
+      {
+        "label": "signal:ARB",
+        "backendDevice": "gpu",
+        "tokensPerSecond": 17.851931169504578,
+        "promptTokens": 2057,
+        "generatedTokens": 109,
+        "timeToFirstTokenMs": 8776.172
+      },
+      {
+        "label": "signal:DOGE",
+        "backendDevice": "gpu",
+        "tokensPerSecond": 17.494442780910376,
+        "promptTokens": 1913,
+        "generatedTokens": 112,
+        "timeToFirstTokenMs": 7635.356
+      },
+      {
+        "label": "portfolio",
+        "backendDevice": "gpu",
+        "tokensPerSecond": 18.21458624066152,
+        "promptTokens": 1441,
+        "generatedTokens": 91,
+        "timeToFirstTokenMs": 5859.204
+      }
+    ],
+    "profilerSummary": "============================================================\nPROFILER SUMMARY\n============================================================\n\nSession:\n  Status:        enabled\n  Mode:          verbose\n  Clock:         performance (monotonic: true)\n  Events:        274\n  Dropped:       0\n\nKey Metrics:\n------------------------------------------------------------\n  Metric               Samples         Avg       Total\n------------------------------------------------------------\n  RPC Total                 17       7.00s       1.98m\n  Handler                   34       6.99s       3.96m\n\n============================================================"
+  }
+}</script>
+<script>
+  const report = JSON.parse(document.getElementById("report-data").textContent);
+  const $ = (id) => document.getElementById(id);
+  const esc = (s) => String(s).replace(/[&<>]/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;" }[c]));
+  const barClass = (st) => (["bearish","reduce","avoid"].includes(st) ? "r" : st === "neutral" ? "n" : "");
+
+  // chip device
+  const dev = (report.proof.stats.find(s => s.backendDevice) || {}).backendDevice || "on-device";
+  const tps = report.proof.stats.map(s => s.tokensPerSecond).filter(Boolean);
+  const avgT = tps.length ? (tps.reduce((a,b)=>a+b,0)/tps.length).toFixed(0) : null;
+  $("chip-dev").textContent = avgT ? `${dev} · ~${avgT} tok/s` : dev;
+
+  $("gen-meta").textContent = `${report.dataDir} · ${new Date(report.generatedAt).toUTCString()}`;
+  $("pf-summary").textContent = report.portfolio.portfolioSummary;
+  $("pf-breaches").innerHTML = (report.portfolio.keyRisks||[]).map(r => `<li>${esc(r)}</li>`).join("");
+
+  $("sig-meta").textContent = `${report.assetCount} assets · reasoned from your private notes`;
+  $("signals").innerHTML = report.signals.map(s => {
+    const on = "█".repeat(s.conviction), off = "░".repeat(5 - s.conviction);
+    return `<div class="card">
+      <div class="card-h">
+        <span class="tk">${esc(s.asset)}</span>
+        <span class="badge b-${esc(s.stance)}">${esc(s.stance)}</span>
+        <span class="conv"><span class="bar ${barClass(s.stance)}"><span class="on">${on}</span>${off}</span> ${s.conviction}/5</span>
+      </div>
+      <div class="f"><div class="k">thesis</div><div class="v">${esc(s.thesis)}</div></div>
+      <div class="f"><div class="k">risk</div><div class="v">${esc(s.risk)}</div></div>
+      <div class="f"><div class="k">action</div><div class="v">${esc(s.suggestedAction)}</div></div>
+      ${s.sources && s.sources.length ? `<div class="srcline">grounded on ${s.sources.length} retrieved private note(s)</div>` : ""}
+    </div>`;
+  }).join("");
+
+  $("p-host").textContent = report.proof.host;
+  $("p-dev").textContent = dev;
+  $("p-llm").textContent = report.llmModel;
+  $("p-emb").textContent = report.embedModel;
+  $("p-stats").innerHTML = report.proof.stats.map(s => `<tr>
+      <td>${esc(s.label)}</td>
+      <td class="ok">${esc(s.backendDevice || "?")}</td>
+      <td>${s.tokensPerSecond != null ? s.tokensPerSecond.toFixed(1) : "n/a"}</td>
+      <td>${s.generatedTokens != null ? s.generatedTokens : ""}</td>
+    </tr>`).join("");
+  $("p-prof").textContent = report.proof.profilerSummary;
+</script>
+</body>
+</html>

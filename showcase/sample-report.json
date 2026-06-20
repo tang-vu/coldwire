@@ -1,0 +1,164 @@
+{
+  "generatedAt": "2026-06-20T22:02:28.782Z",
+  "llmModel": "LLAMA_3_2_1B_INST_Q4_0",
+  "embedModel": "GTE_LARGE_FP16",
+  "dataDir": "data/sample",
+  "assetCount": 6,
+  "portfolio": {
+    "portfolioSummary": "I'm cautious about my portfolio, prioritizing capital preservation over upside growth. I've set strict limits on risk and exposure.",
+    "keyRisks": [
+      "SOL is 36% of NAV, above my 25% single-alt cap",
+      "total alt exposure 53.7% > 50% cap",
+      "ARB bought into an unlock, violating my own rule"
+    ]
+  },
+  "signals": [
+    {
+      "stance": "bullish",
+      "conviction": 2,
+      "thesis": "BTC (Bitcoin) is a strong candidate for accumulation due to its constructive bias and the potential for a significant price increase.",
+      "risk": "- The single biggest risk or what invalidates this idea is the dominance of BTC, which could lead to an oversold market.",
+      "suggestedAction": "Reduce position size by 2% to 25% of NAV.",
+      "asset": "BTC",
+      "sources": [
+        "## Position 2 — BTC (long spot) - Size: 0.65 BTC, avg entry 61,200, current ~68,000. Unrealized +11.1%. - Weig",
+        "scoring > and risk commentary in MY rules — not generic advice. ## Objective Grow NAV through a full crypto cy",
+        "Source: positions.md # Open Positions — SYNTHETIC SAMPLE DATA (not real) > Fake portfolio. This is the kind of",
+        "Source: strategy.md # Strategy & Risk Notes — SYNTHETIC SAMPLE DATA (not real) > My personal trading framework"
+      ]
+    },
+    {
+      "stance": "neutral",
+      "conviction": 2,
+      "thesis": "ETH/BTC ratio basing around 0.046; staking yield ~3.2%. The current support and resistance levels are crucial in determining the next move.",
+      "risk": "-5.0% (unrealized -5.0%)",
+      "suggestedAction": "Reduce position size to 1.5 ETH, target stop at 2950 / 2700.",
+      "asset": "ETH",
+      "sources": [
+        "## Position 3 — ETH (long spot) - Size: 4.0 ETH, avg entry 3,420, current ~3,250. Unrealized -5.0%. - Weight: ",
+        "Source: watchlist.md # Watchlist — SYNTHETIC SAMPLE DATA (not real) > Fake data shipped so Coldwire runs repro",
+        "Source: positions.md # Open Positions — SYNTHETIC SAMPLE DATA (not real) > Fake portfolio. This is the kind of",
+        "scoring > and risk commentary in MY rules — not generic advice. ## Objective Grow NAV through a full crypto cy"
+      ]
+    },
+    {
+      "stance": "reduce",
+      "conviction": 1,
+      "thesis": "SOL is a high-beta long asset with strong conviction, but its oversized position and concentration risk flag it as a bearish idea.",
+      "risk": "- Oversized position (36% of NAV) and concentration risk flag make this an avoidable idea.",
+      "suggestedAction": "Reduce the position to 25% of NAV by taking 25% off at 190, then trim winners that breach the single-position cap.",
+      "asset": "SOL",
+      "sources": [
+        "## Position 1 — SOL (long spot) - Size: 220 SOL, avg entry 128.40, current ~165. Unrealized +28.6%. - Weight: ",
+        "scoring > and risk commentary in MY rules — not generic advice. ## Objective Grow NAV through a full crypto cy",
+        "Source: positions.md # Open Positions — SYNTHETIC SAMPLE DATA (not real) > Fake portfolio. This is the kind of",
+        "Source: strategy.md # Strategy & Risk Notes — SYNTHETIC SAMPLE DATA (not real) > My personal trading framework"
+      ]
+    },
+    {
+      "stance": "accumulate",
+      "conviction": 3,
+      "thesis": "LINK is a narrative-driven asset with a strong bias towards accumulation on weakness.",
+      "risk": "CCIP adoption + any TradFi tokenization headline pumps it, and its slow mover nature.",
+      "suggestedAction": "Reduce the position size to 25% of NAV and add a stop-loss at 18k.",
+      "asset": "LINK",
+      "sources": [
+        "## LINK — Chainlink - Bias: accumulate on weakness. Slow mover, narrative-driven. - Catalyst watch: CCIP adopt",
+        "scoring > and risk commentary in MY rules — not generic advice. ## Objective Grow NAV through a full crypto cy",
+        "Source: positions.md # Open Positions — SYNTHETIC SAMPLE DATA (not real) > Fake portfolio. This is the kind of",
+        "Source: strategy.md # Strategy & Risk Notes — SYNTHETIC SAMPLE DATA (not real) > My personal trading framework"
+      ]
+    },
+    {
+      "stance": "neutral",
+      "conviction": 3,
+      "thesis": "The ARB (Arbitrum) asset is a strong candidate for growth, driven by its strong tech fundamentals and potential catalysts.",
+      "risk": "-17.0% - The unrealized loss of ~$1,700 on the current position breaches my single-position cap, making it necessary to cut or hold to 0.62.",
+      "suggestedAction": "Reduce ARB to 0.62.",
+      "asset": "ARB",
+      "sources": [
+        "## Position 4 — ARB (tactical long) - Size: 6,000 ARB, avg entry 0.94, current ~0.78. Unrealized -17.0%. - Wei",
+        "; resistance 18, then 22. - Note: staking v0.2 locked supply helps. Low float games on exchanges cause violent",
+        "scoring > and risk commentary in MY rules — not generic advice. ## Objective Grow NAV through a full crypto cy",
+        "~3,250. Unrealized -5.0%. - Weight: 13% of NAV. - Stop: 2,700 weekly close. Thesis intact but underperforming;"
+      ]
+    },
+    {
+      "stance": "avoid",
+      "conviction": 2,
+      "thesis": "DOGE pumping is a late-cycle risk signal, not an entry point. If DOGE leads, I will trim everything.",
+      "risk": "DOGE leading to a flush of longs and shorts on ARB, which could lead to a significant sell-off in BTC and other alts.",
+      "suggestedAction": "I will de-risk into BTC/cash during alt euphoria (DOGE leading, funding rates spiking).",
+      "asset": "DOGE",
+      "sources": [
+        "## DOGE — Dogecoin - Bias: avoid / pure sentiment play. On watchlist only to gauge retail risk appetite. - Not",
+        "; resistance 18, then 22. - Note: staking v0.2 locked supply helps. Low float games on exchanges cause violent",
+        "scoring > and risk commentary in MY rules — not generic advice. ## Objective Grow NAV through a full crypto cy",
+        "concentration is the silent killer. - Never average down on a TACTICAL trade (only on long-term sleeves: BTC, "
+      ]
+    }
+  ],
+  "proof": {
+    "onDevice": true,
+    "host": "DESKTOP-1A6OPC9",
+    "stats": [
+      {
+        "label": "signal:BTC",
+        "backendDevice": "gpu",
+        "tokensPerSecond": 17.167934969986202,
+        "promptTokens": 2058,
+        "generatedTokens": 97,
+        "timeToFirstTokenMs": 8752.136
+      },
+      {
+        "label": "signal:ETH",
+        "backendDevice": "gpu",
+        "tokensPerSecond": 16.683639164956325,
+        "promptTokens": 2265,
+        "generatedTokens": 103,
+        "timeToFirstTokenMs": 9404.449
+      },
+      {
+        "label": "signal:SOL",
+        "backendDevice": "gpu",
+        "tokensPerSecond": 16.754312348682898,
+        "promptTokens": 2076,
+        "generatedTokens": 111,
+        "timeToFirstTokenMs": 8757.596
+      },
+      {
+        "label": "signal:LINK",
+        "backendDevice": "gpu",
+        "tokensPerSecond": 17.02144779792756,
+        "promptTokens": 1973,
+        "generatedTokens": 88,
+        "timeToFirstTokenMs": 8658.982
+      },
+      {
+        "label": "signal:ARB",
+        "backendDevice": "gpu",
+        "tokensPerSecond": 17.851931169504578,
+        "promptTokens": 2057,
+        "generatedTokens": 109,
+        "timeToFirstTokenMs": 8776.172
+      },
+      {
+        "label": "signal:DOGE",
+        "backendDevice": "gpu",
+        "tokensPerSecond": 17.494442780910376,
+        "promptTokens": 1913,
+        "generatedTokens": 112,
+        "timeToFirstTokenMs": 7635.356
+      },
+      {
+        "label": "portfolio",
+        "backendDevice": "gpu",
+        "tokensPerSecond": 18.21458624066152,
+        "promptTokens": 1441,
+        "generatedTokens": 91,
+        "timeToFirstTokenMs": 5859.204
+      }
+    ],
+    "profilerSummary": "============================================================\nPROFILER SUMMARY\n============================================================\n\nSession:\n  Status:        enabled\n  Mode:          verbose\n  Clock:         performance (monotonic: true)\n  Events:        274\n  Dropped:       0\n\nKey Metrics:\n------------------------------------------------------------\n  Metric               Samples         Avg       Total\n------------------------------------------------------------\n  RPC Total                 17       7.00s       1.98m\n  Handler                   34       6.99s       3.96m\n\n============================================================"
+  }
+}

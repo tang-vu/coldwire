@@ -25,6 +25,9 @@ data/private/
 proof/*.json
 proof/*.log
 
+# Vercel (project linking; not secret but machine-local)
+.vercel/
+
 # OS / editor
 .DS_Store
 Thumbs.db

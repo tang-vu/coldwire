@@ -7,6 +7,10 @@
 
 Built for the Tether **QVAC "Unleash Edge AI"** hackathon. Apache-2.0.
 
+**Live showcase (static snapshot of a real on-device run):**
+[coldwire-edge-ai.vercel.app](https://coldwire-edge-ai.vercel.app)
+— this page only *displays* a report generated 100% on-device; **no inference runs on it**.
+
 ---
 
 ## Why edge?
