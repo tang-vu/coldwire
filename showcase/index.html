@@ -3,172 +3,230 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Coldwire — on-device private alpha agent</title>
-<meta name="description" content="A 100% on-device private alpha agent for crypto traders. Local inference + RAG via @qvac/sdk. Zero cloud, $0 inference, works offline." />
+<title>Coldwire — private alpha agent, decoded on-device</title>
+<meta name="description" content="A private alpha agent for crypto traders. Your positions never leave the device; a local LLM + RAG return a structured signal report. Zero cloud, $0 inference, works offline." />
 <style>
   :root{
-    --bg:#070a10; --bg2:#0d1119; --panel:#121826; --panel2:#19202f; --line:#222c3e;
-    --ink:#e9edf5; --dim:#8a93a8; --faint:#5c6678;
-    --acc:#3ddc91; --acc2:#1f7a55; --warn:#f5c451; --bad:#f06a6a; --blue:#6aa6ff;
-    --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+    --ground:#F4F6FA;
+    --surface:#FFFFFF;
+    --line:#DCE3ED;
+    --line-2:#C4CEDC;
+    --text:#0C1A2B;
+    --muted:#566479;
+    --faint:#8A97A8;
+    --accent:#1F46FF;       /* electric cobalt — the wire */
+    --accent-ink:#13309E;
+    --accent-wash:#ECF0FF;
+    --red:#E5484D;
+    --red-wash:#FCEDED;
+    --slate:#5B6B82;
+    --mono:ui-monospace,"Cascadia Code","SF Mono","Segoe UI Mono",Menlo,Consolas,monospace;
     --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --maxw:1080px;
   }
   *{box-sizing:border-box}
-  html,body{margin:0}
-  body{background:
-      radial-gradient(900px 500px at 80% -10%, rgba(61,220,145,.10), transparent 60%),
-      radial-gradient(700px 500px at 0% 0%, rgba(106,166,255,.08), transparent 55%),
-      var(--bg);
-    color:var(--ink);font-family:var(--sans);line-height:1.55;-webkit-font-smoothing:antialiased}
-  .wrap{max-width:980px;margin:0 auto;padding:30px 20px 90px}
-  a{color:var(--acc);text-decoration:none}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;background:var(--ground);color:var(--text);font-family:var(--sans);
+    line-height:1.55;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+  }
+  a{color:var(--accent);text-decoration:none}
   a:hover{text-decoration:underline}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:2px}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  .mono{font-family:var(--mono)}
 
-  .topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:34px}
-  .brand{display:flex;align-items:center;gap:11px;font-weight:800;font-size:18px;letter-spacing:-.3px}
-  .dot{width:11px;height:11px;border-radius:50%;background:var(--acc);box-shadow:0 0 0 4px rgba(61,220,145,.16);animation:pulse 2.4s infinite}
-  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.45}}
-  .src-link{font-family:var(--mono);font-size:12.5px;color:var(--dim);border:1px solid var(--line);padding:7px 12px;border-radius:8px}
+  /* ---- device status strip ---- */
+  .status{position:sticky;top:0;z-index:10;background:rgba(244,246,250,.86);backdrop-filter:saturate(1.4) blur(6px);
+    border-bottom:1px solid var(--line)}
+  .status .wrap{display:flex;align-items:center;gap:18px;height:42px;font-family:var(--mono);
+    font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);overflow-x:auto;white-space:nowrap}
+  .status .live{display:inline-flex;align-items:center;gap:7px;color:var(--text);font-weight:600}
+  .status .pip{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 0 rgba(31,70,255,.5);animation:pip 2.2s infinite}
+  @keyframes pip{0%{box-shadow:0 0 0 0 rgba(31,70,255,.45)}70%{box-shadow:0 0 0 7px rgba(31,70,255,0)}100%{box-shadow:0 0 0 0 rgba(31,70,255,0)}}
+  .status b{color:var(--text);font-weight:600}
+  .status .sep{color:var(--line-2)}
 
-  .hero h1{font-size:clamp(30px,6vw,50px);line-height:1.05;letter-spacing:-1.4px;margin:.1em 0 .15em}
-  .hero h1 .g{background:linear-gradient(90deg,#3ddc91,#6aa6ff);-webkit-background-clip:text;background-clip:text;color:transparent}
-  .hero p{font-size:clamp(15px,2.4vw,19px);color:var(--dim);max-width:64ch;margin:0 0 22px}
-  .chips{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px}
-  .chip{display:inline-flex;align-items:center;gap:8px;background:var(--panel);border:1px solid var(--line);border-radius:99px;padding:8px 14px;font-size:13px;font-weight:600}
-  .chip b{color:var(--acc)}
-  .chip .mono{font-family:var(--mono);color:var(--ink)}
+  /* ---- hero ---- */
+  header.hero{padding:64px 0 0}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);font-weight:600;margin:0 0 20px}
+  h1{font-family:var(--mono);font-weight:680;font-size:clamp(33px,6.4vw,66px);line-height:1.0;letter-spacing:-.035em;margin:0;max-width:18ch}
+  h1 .ship{display:block;color:var(--accent)}
+  .lede{font-size:clamp(15px,1.9vw,18.5px);color:var(--muted);max-width:60ch;margin:24px 0 0}
+  .lede b{color:var(--text);font-weight:600}
 
-  .note{margin-top:18px;background:linear-gradient(0deg,rgba(245,196,81,.06),rgba(245,196,81,.06));border:1px solid #43391d;color:#e7d9b0;
-    border-radius:10px;padding:11px 14px;font-size:13px}
-  .note b{color:var(--warn)}
+  /* ---- live wire canvas ---- */
+  .wire-band{margin:40px 0 8px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    background:linear-gradient(180deg,#fff, #fbfcfe);position:relative}
+  .wire-band .tag{position:absolute;left:24px;top:10px;font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--faint)}
+  #wire{display:block;width:100%;height:150px}
 
-  section{margin-top:34px}
-  .h{display:flex;align-items:baseline;gap:10px;margin:0 0 14px}
-  .h h2{font-size:20px;letter-spacing:-.3px;margin:0}
-  .h .meta{font-family:var(--mono);font-size:12px;color:var(--faint)}
+  /* ---- section frame ---- */
+  main{padding:18px 0 0}
+  .stack{display:flex;flex-direction:column;gap:54px;padding:34px 0 0}
+  .sec-head{display:flex;align-items:center;gap:14px;margin:0 0 18px}
+  .sec-tick{width:9px;height:9px;background:var(--accent);flex:none}
+  .sec-head h2{font-family:var(--mono);font-size:13px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;margin:0}
+  .sec-head .rule{flex:1;height:1px;background:var(--line)}
+  .sec-head .count{font-family:var(--mono);font-size:11.5px;color:var(--faint);letter-spacing:.08em}
 
-  .panel{background:linear-gradient(180deg,var(--panel),var(--bg2));border:1px solid var(--line);border-radius:14px;padding:18px 20px}
-  .flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-family:var(--mono);font-size:12.5px;color:var(--dim)}
-  .flow .b{background:var(--panel2);border:1px solid var(--line);border-radius:7px;padding:6px 10px;color:var(--ink)}
-  .flow .ar{color:var(--acc)}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:4px}
 
-  .pf-sum{font-size:15.5px}
-  .breaches{list-style:none;padding:0;margin:14px 0 0;display:grid;gap:8px}
-  .breaches li{display:flex;gap:10px;align-items:flex-start;background:rgba(240,106,106,.06);border:1px solid #3a2030;border-radius:9px;padding:10px 12px;font-size:14px}
-  .breaches li::before{content:"⚠";color:var(--bad);font-size:14px;line-height:1.4}
+  /* ---- portfolio ---- */
+  .book{padding:22px 24px}
+  .book .summary{font-size:17px;line-height:1.5;color:var(--text);max-width:70ch}
+  .breaches{list-style:none;margin:20px 0 0;padding:0;display:grid;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:4px;overflow:hidden}
+  .breaches li{display:grid;grid-template-columns:120px 1fr;gap:14px;background:var(--surface);padding:13px 16px;align-items:baseline}
+  .breaches .lab{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--red);font-weight:600}
+  .breaches .txt{font-size:14.5px;color:var(--text)}
 
-  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
-  .card{background:linear-gradient(180deg,var(--panel),var(--bg2));border:1px solid var(--line);border-radius:13px;padding:15px 16px}
-  .card-h{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-bottom:6px}
-  .tk{font-family:var(--mono);font-weight:800;font-size:19px}
-  .badge{font-size:10.5px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;padding:3px 9px;border-radius:99px}
-  .b-bullish,.b-accumulate{background:rgba(61,220,145,.14);color:var(--acc)}
-  .b-bearish,.b-reduce,.b-avoid{background:rgba(240,106,106,.14);color:var(--bad)}
-  .b-neutral{background:rgba(245,196,81,.14);color:var(--warn)}
-  .conv{margin-left:auto;font-family:var(--mono);font-size:12px;color:var(--dim);display:flex;align-items:center;gap:7px}
-  .bar{letter-spacing:1px}
-  .bar .on{color:var(--acc)} .bar.r .on{color:var(--bad)} .bar.n .on{color:var(--warn)}
-  .f{margin-top:9px}
-  .f .k{font-size:10.5px;text-transform:uppercase;letter-spacing:.5px;color:var(--faint)}
-  .f .v{font-size:13.5px;color:var(--ink)}
-  .srcline{margin-top:10px;font-size:11.5px;color:var(--faint);font-style:italic;border-top:1px dashed var(--line);padding-top:8px}
+  /* ---- signals ledger ---- */
+  .ledger{display:grid;gap:0;background:var(--surface);border:1px solid var(--line);border-radius:4px;overflow:hidden}
+  .sig{display:grid;grid-template-columns:200px 1fr;gap:24px;padding:20px 22px;border-top:1px solid var(--line);transition:background .15s}
+  .sig:first-child{border-top:0}
+  .sig:hover{background:#fafcff}
+  .sig .left{display:flex;flex-direction:column;gap:12px}
+  .sig .tk{font-family:var(--mono);font-weight:700;font-size:28px;letter-spacing:-.02em;line-height:1}
+  .chip{align-self:flex-start;font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+    padding:5px 9px;border-radius:3px;border:1px solid}
+  .pos{color:var(--accent);background:var(--accent-wash);border-color:#cdd8ff}
+  .neg{color:var(--red);background:var(--red-wash);border-color:#f4cfd0}
+  .neu{color:var(--slate);background:#eef1f5;border-color:#dde3ec}
+  .gauge{display:flex;gap:4px;align-items:center}
+  .gauge .cell{width:15px;height:15px;border:1px solid var(--line-2);border-radius:2px}
+  .gauge.pos .on{background:var(--accent);border-color:var(--accent)}
+  .gauge.neg .on{background:var(--red);border-color:var(--red)}
+  .gauge.neu .on{background:var(--slate);border-color:var(--slate)}
+  .gauge .num{margin-left:6px;font-family:var(--mono);font-size:11px;color:var(--faint)}
+  .sig .right{display:flex;flex-direction:column;gap:11px;min-width:0}
+  .field{display:grid;grid-template-columns:62px 1fr;gap:14px;align-items:baseline}
+  .field .k{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+  .field .v{font-size:14.5px;color:var(--text);line-height:1.5}
+  .src{font-family:var(--mono);font-size:11px;color:var(--faint);padding-top:4px}
 
-  .proof-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px}
-  @media(max-width:640px){.proof-grid{grid-template-columns:1fr}}
-  .kv{font-family:var(--mono);font-size:12.5px;color:var(--dim)}
-  .kv b{color:var(--ink)} .kv .ok{color:var(--acc)}
-  table{width:100%;border-collapse:collapse;margin-top:12px;font-family:var(--mono);font-size:12px}
-  th,td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--line)}
-  th{color:var(--faint);font-weight:600;text-transform:uppercase;font-size:10.5px;letter-spacing:.4px}
-  td .ok{color:var(--acc)}
-  .hashes{margin-top:12px;font-family:var(--mono);font-size:11px;color:var(--faint);word-break:break-all}
-  .hashes b{color:var(--dim)}
-  pre.prof{margin-top:12px;background:#0a0e15;border:1px solid var(--line);border-radius:9px;padding:12px;overflow:auto;font-family:var(--mono);font-size:11.5px;color:var(--dim)}
+  /* ---- receipts / proof ---- */
+  .receipt{overflow:hidden}
+  .receipt .head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;
+    padding:13px 18px;background:#0C1A2B;color:#cdd8ff;font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase}
+  .receipt .head .ok{color:#7fa0ff}
+  .receipt .body{padding:18px}
+  .kv-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px 24px}
+  @media(max-width:620px){.kv-grid{grid-template-columns:1fr}}
+  .kv{font-family:var(--mono);font-size:12.5px;color:var(--muted);display:flex;gap:8px}
+  .kv .k{color:var(--faint)} .kv b{color:var(--text);font-weight:600}
+  table{width:100%;border-collapse:collapse;margin-top:18px;font-family:var(--mono);font-size:12px}
+  th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line)}
+  thead th{color:var(--faint);font-weight:600;text-transform:uppercase;font-size:10px;letter-spacing:.12em;border-bottom:1px solid var(--line-2)}
+  td.dev{color:var(--accent);font-weight:600}
+  .hashes{margin-top:16px;font-family:var(--mono);font-size:10.5px;color:var(--faint);line-height:1.7;word-break:break-all}
+  .hashes b{color:var(--muted)}
+  pre.prof{margin:14px 0 0;background:#F2F5FA;border:1px solid var(--line);border-radius:4px;padding:14px;overflow:auto;
+    font-family:var(--mono);font-size:11px;color:var(--muted);line-height:1.5}
 
-  footer{margin-top:40px;border-top:1px solid var(--line);padding-top:18px;color:var(--faint);font-size:13px;display:flex;gap:14px;flex-wrap:wrap;justify-content:space-between}
+  .note{display:flex;gap:12px;align-items:flex-start;margin:18px 0 0;padding:13px 16px;border:1px solid var(--line);border-left:3px solid var(--accent);
+    background:var(--surface);border-radius:0 4px 4px 0;font-size:13.5px;color:var(--muted)}
+  .note b{color:var(--text)}
+
+  footer{margin:70px 0 56px;padding-top:22px;border-top:1px solid var(--line);
+    display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;
+    font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;color:var(--faint)}
+  footer .src-btn{border:1px solid var(--line-2);border-radius:3px;padding:8px 13px;color:var(--text)}
+  footer .src-btn:hover{border-color:var(--accent);color:var(--accent);text-decoration:none}
+
+  @media (prefers-reduced-motion: reduce){ .pip{animation:none} }
+  @media(max-width:560px){
+    .sig{grid-template-columns:1fr;gap:16px}
+    .breaches li{grid-template-columns:1fr;gap:4px}
+  }
 </style>
 </head>
 <body>
-<div class="wrap">
 
-  <div class="topbar">
-    <div class="brand"><span class="dot"></span> Coldwire</div>
-    <a class="src-link" href="https://github.com/" data-repo>★ Source · Apache-2.0</a>
+  <div class="status">
+    <div class="wrap">
+      <span class="live"><span class="pip"></span> On-device</span>
+      <span class="sep">│</span><span>host <b id="s-host">—</b></span>
+      <span class="sep">│</span><span>llm <b id="s-llm">—</b></span>
+      <span class="sep">│</span><span>backend <b id="s-dev">—</b></span>
+      <span class="sep">│</span><span>network <b>optional</b></span>
+      <span class="sep">│</span><span>cloud calls <b>0</b></span>
+    </div>
   </div>
 
   <header class="hero">
-    <h1>Your alpha never leaves <span class="g">your device.</span></h1>
-    <p>A 100%-on-device private alpha agent for crypto traders. It reads your private
-       watchlist, positions and strategy and produces a structured signal report using
-       <b>local inference + RAG via @qvac/sdk</b>.</p>
-    <div class="chips">
-      <span class="chip">🔒 Private — notes stay local</span>
-      <span class="chip">✈️ Works <b>offline</b></span>
-      <span class="chip">💸 <b>$0</b> inference, no API keys</span>
-      <span class="chip">⚡ <span class="mono" id="chip-dev">on-device</span></span>
-    </div>
-    <div class="note">
-      <b>This page is a static snapshot.</b> The report below was generated
-      <b>100% on-device</b> by Coldwire and pasted here — <b>no inference or API call
-      runs on this page</b>. Run the real agent on your own hardware (it works with the
-      network off): see the source repo.
+    <div class="wrap">
+      <p class="eyebrow">Coldwire — private alpha agent</p>
+      <h1>Your positions never leave the device.<span class="ship">The signal still ships.</span></h1>
+      <p class="lede">Coldwire reads your private watchlist, open positions and strategy, then returns a
+        structured signal report — reasoned by a <b>local LLM with RAG</b>, entirely on your hardware.
+        <b>Zero cloud. $0 inference. Works in airplane mode.</b></p>
     </div>
   </header>
 
-  <section>
-    <div class="h"><h2>How it was generated</h2></div>
-    <div class="panel">
-      <div class="flow">
-        <span class="b">private .md notes</span><span class="ar">▸</span>
-        <span class="b">GTE-large embeddings</span><span class="ar">▸</span>
-        <span class="b">local RAG (HyperDB)</span><span class="ar">▸</span>
-        <span class="b">Llama 3.2 1B · JSON-schema constrained</span><span class="ar">▸</span>
-        <span class="b">bias-grounding</span><span class="ar">▸</span>
-        <span class="b">signal report</span>
-      </div>
+  <div class="wire-band">
+    <span class="tag">live signal · llama-3.2-1b · on-device</span>
+    <canvas id="wire" aria-hidden="true"></canvas>
+  </div>
+
+  <main>
+    <div class="wrap stack">
+
+      <section>
+        <div class="sec-head"><span class="sec-tick"></span><h2>The Book</h2><span class="rule"></span><span class="count" id="c-book"></span></div>
+        <div class="card book">
+          <div class="summary" id="pf-summary"></div>
+          <ul class="breaches" id="pf-breaches"></ul>
+        </div>
+      </section>
+
+      <section>
+        <div class="sec-head"><span class="sec-tick"></span><h2>The Signals</h2><span class="rule"></span><span class="count" id="c-sig"></span></div>
+        <div class="ledger" id="signals"></div>
+      </section>
+
+      <section>
+        <div class="sec-head"><span class="sec-tick"></span><h2>The Receipts</h2><span class="rule"></span><span class="count">proof, not a cloud call</span></div>
+        <div class="card receipt">
+          <div class="head">
+            <span>on-device execution log</span>
+            <span class="ok" id="r-host">✓</span>
+          </div>
+          <div class="body">
+            <div class="kv-grid">
+              <div class="kv"><span class="k">host</span><b id="p-host"></b></div>
+              <div class="kv"><span class="k">backend</span><b id="p-dev"></b></div>
+              <div class="kv"><span class="k">llm</span><b id="p-llm"></b></div>
+              <div class="kv"><span class="k">embeddings</span><b id="p-emb"></b></div>
+            </div>
+            <table>
+              <thead><tr><th>inference call</th><th>device</th><th>tok/s</th><th>generated</th></tr></thead>
+              <tbody id="p-stats"></tbody>
+            </table>
+            <div class="hashes">
+              <b>model sha256 — checksum-validated locally by the SDK</b><br>
+              llama-3.2-1b-instruct-q4_0 · 66BFBB2D48BDB77CD56BD03EF820DEFF3C4A74B1A09DE3B917AE13E72C1A70C2<br>
+              gte-large-fp16 · 939F1FB3FCC70F2A250A7E7AD7C2FBDC1397D46F9A8055D053E451829C5293FB
+            </div>
+            <pre class="prof" id="p-prof"></pre>
+            <div class="note">
+              <span><b>This page is a static snapshot.</b> The report above was generated 100% on-device and
+              pasted here — no inference or network call runs on this page. Run the real agent on your own
+              hardware (it works offline).</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
     </div>
-  </section>
+  </main>
 
-  <section>
-    <div class="h"><h2>Portfolio</h2><span class="meta" id="gen-meta"></span></div>
-    <div class="panel">
-      <div class="pf-sum" id="pf-summary"></div>
-      <ul class="breaches" id="pf-breaches"></ul>
-    </div>
-  </section>
-
-  <section>
-    <div class="h"><h2>Signals</h2><span class="meta" id="sig-meta"></span></div>
-    <div class="grid" id="signals"></div>
-  </section>
-
-  <section>
-    <div class="h"><h2>On-device proof</h2><span class="meta">verifiable · not a cloud call</span></div>
-    <div class="panel">
-      <div class="proof-grid">
-        <div class="kv">host: <b id="p-host"></b></div>
-        <div class="kv">backend: <b class="ok" id="p-dev"></b></div>
-        <div class="kv">llm: <b id="p-llm"></b></div>
-        <div class="kv">embeddings: <b id="p-emb"></b></div>
-      </div>
-      <table>
-        <thead><tr><th>inference call</th><th>device</th><th>tokens/sec</th><th>generated</th></tr></thead>
-        <tbody id="p-stats"></tbody>
-      </table>
-      <div class="hashes">
-        <b>model sha256 (checksum-validated by the SDK):</b><br>
-        Llama-3.2-1B-Instruct-Q4_0.gguf — 66BFBB2D48BDB77CD56BD03EF820DEFF3C4A74B1A09DE3B917AE13E72C1A70C2<br>
-        gte-large_fp16.gguf — 939F1FB3FCC70F2A250A7E7AD7C2FBDC1397D46F9A8055D053E451829C5293FB
-      </div>
-      <pre class="prof" id="p-prof"></pre>
-    </div>
-  </section>
-
-  <footer>
-    <span>Coldwire · open source · Apache-2.0 · QVAC "Unleash Edge AI"</span>
-    <span>All inference on-device via @qvac/sdk · zero cloud</span>
-  </footer>
-</div>
+  <div class="wrap">
+    <footer>
+      <span>Coldwire · open source · Apache-2.0 · QVAC “Unleash Edge AI”</span>
+      <a class="src-btn" href="https://github.com/" data-repo>View source →</a>
+    </footer>
+  </div>
 
 <script id="report-data" type="application/json">{
   "generatedAt": "2026-06-20T22:02:28.782Z",
@@ -335,48 +393,103 @@
   }
 }</script>
 <script>
-  const report = JSON.parse(document.getElementById("report-data").textContent);
-  const $ = (id) => document.getElementById(id);
-  const esc = (s) => String(s).replace(/[&<>]/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;" }[c]));
-  const barClass = (st) => (["bearish","reduce","avoid"].includes(st) ? "r" : st === "neutral" ? "n" : "");
+(function(){
+  "use strict";
+  var report = JSON.parse(document.getElementById("report-data").textContent);
+  var $ = function(id){ return document.getElementById(id); };
+  var esc = function(s){ return String(s).replace(/[&<>]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;"}[c];}); };
+  var cls = function(st){ return ["bearish","reduce","avoid"].indexOf(st)>=0 ? "neg" : st==="neutral" ? "neu" : "pos"; };
 
-  // chip device
-  const dev = (report.proof.stats.find(s => s.backendDevice) || {}).backendDevice || "on-device";
-  const tps = report.proof.stats.map(s => s.tokensPerSecond).filter(Boolean);
-  const avgT = tps.length ? (tps.reduce((a,b)=>a+b,0)/tps.length).toFixed(0) : null;
-  $("chip-dev").textContent = avgT ? `${dev} · ~${avgT} tok/s` : dev;
+  var stats = report.proof.stats || [];
+  var dev = (stats.find(function(s){return s.backendDevice;})||{}).backendDevice || "local";
+  var tps = stats.map(function(s){return s.tokensPerSecond;}).filter(Boolean);
+  var avg = tps.length ? Math.round(tps.reduce(function(a,b){return a+b;},0)/tps.length) : null;
 
-  $("gen-meta").textContent = `${report.dataDir} · ${new Date(report.generatedAt).toUTCString()}`;
+  // status strip
+  $("s-host").textContent = report.proof.host;
+  $("s-llm").textContent = report.llmModel.replace(/_/g,"-").toLowerCase();
+  $("s-dev").textContent = dev + (avg? " · "+avg+" tok/s" : "");
+
+  // book
+  $("c-book").textContent = "NAV review · " + report.dataDir;
   $("pf-summary").textContent = report.portfolio.portfolioSummary;
-  $("pf-breaches").innerHTML = (report.portfolio.keyRisks||[]).map(r => `<li>${esc(r)}</li>`).join("");
-
-  $("sig-meta").textContent = `${report.assetCount} assets · reasoned from your private notes`;
-  $("signals").innerHTML = report.signals.map(s => {
-    const on = "█".repeat(s.conviction), off = "░".repeat(5 - s.conviction);
-    return `<div class="card">
-      <div class="card-h">
-        <span class="tk">${esc(s.asset)}</span>
-        <span class="badge b-${esc(s.stance)}">${esc(s.stance)}</span>
-        <span class="conv"><span class="bar ${barClass(s.stance)}"><span class="on">${on}</span>${off}</span> ${s.conviction}/5</span>
-      </div>
-      <div class="f"><div class="k">thesis</div><div class="v">${esc(s.thesis)}</div></div>
-      <div class="f"><div class="k">risk</div><div class="v">${esc(s.risk)}</div></div>
-      <div class="f"><div class="k">action</div><div class="v">${esc(s.suggestedAction)}</div></div>
-      ${s.sources && s.sources.length ? `<div class="srcline">grounded on ${s.sources.length} retrieved private note(s)</div>` : ""}
-    </div>`;
+  $("pf-breaches").innerHTML = (report.portfolio.keyRisks||[]).map(function(r){
+    return '<li><span class="lab">rule breach</span><span class="txt">'+esc(r)+'</span></li>';
   }).join("");
 
+  // signals
+  $("c-sig").textContent = report.assetCount + " assets";
+  $("signals").innerHTML = report.signals.map(function(s){
+    var c = cls(s.stance), cells="";
+    for(var i=1;i<=5;i++){ cells += '<span class="cell'+(i<=s.conviction?" on":"")+'"></span>'; }
+    return '<div class="sig">'+
+      '<div class="left">'+
+        '<div class="tk">'+esc(s.asset)+'</div>'+
+        '<span class="chip '+c+'">'+esc(s.stance)+'</span>'+
+        '<div class="gauge '+c+'">'+cells+'<span class="num">'+s.conviction+'/5</span></div>'+
+      '</div>'+
+      '<div class="right">'+
+        '<div class="field"><span class="k">thesis</span><span class="v">'+esc(s.thesis)+'</span></div>'+
+        '<div class="field"><span class="k">risk</span><span class="v">'+esc(s.risk)+'</span></div>'+
+        '<div class="field"><span class="k">action</span><span class="v">'+esc(s.suggestedAction)+'</span></div>'+
+        (s.sources&&s.sources.length? '<div class="src">↳ grounded on '+s.sources.length+' retrieved private note(s)</div>':'')+
+      '</div>'+
+    '</div>';
+  }).join("");
+
+  // receipts
+  $("r-host").textContent = "✓ " + report.proof.host;
   $("p-host").textContent = report.proof.host;
   $("p-dev").textContent = dev;
   $("p-llm").textContent = report.llmModel;
   $("p-emb").textContent = report.embedModel;
-  $("p-stats").innerHTML = report.proof.stats.map(s => `<tr>
-      <td>${esc(s.label)}</td>
-      <td class="ok">${esc(s.backendDevice || "?")}</td>
-      <td>${s.tokensPerSecond != null ? s.tokensPerSecond.toFixed(1) : "n/a"}</td>
-      <td>${s.generatedTokens != null ? s.generatedTokens : ""}</td>
-    </tr>`).join("");
+  $("p-stats").innerHTML = stats.map(function(s){
+    return '<tr><td>'+esc(s.label)+'</td><td class="dev">'+esc(s.backendDevice||"?")+'</td><td>'+
+      (s.tokensPerSecond!=null?s.tokensPerSecond.toFixed(1):"n/a")+'</td><td>'+
+      (s.generatedTokens!=null?s.generatedTokens:"")+'</td></tr>';
+  }).join("");
   $("p-prof").textContent = report.proof.profilerSummary;
+
+  // source link (if a repo URL is provided later, set data-repo href)
+  // ---- live wire canvas ----
+  var cv = $("wire"), ctx = cv.getContext("2d");
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var dpr = Math.min(window.devicePixelRatio||1, 2), t = 0, W=0, H=0;
+  function size(){ W = cv.clientWidth; H = cv.clientHeight; cv.width = W*dpr; cv.height = H*dpr; ctx.setTransform(dpr,0,0,dpr,0,0); }
+  function wave(x, phase){
+    var mid = H/2;
+    return mid
+      + Math.sin(x*0.018 + phase)*14
+      + Math.sin(x*0.006 - phase*0.7)*9
+      + Math.sin(x*0.05 + phase*1.6)*3;
+  }
+  function frame(){
+    ctx.clearRect(0,0,W,H);
+    // faint baseline
+    ctx.strokeStyle = "rgba(12,26,43,.06)"; ctx.lineWidth=1;
+    ctx.beginPath(); ctx.moveTo(0,H/2); ctx.lineTo(W,H/2); ctx.stroke();
+    // glow pass
+    ctx.lineJoin="round";
+    ctx.strokeStyle="rgba(31,70,255,.16)"; ctx.lineWidth=7;
+    ctx.beginPath();
+    for(var x=0;x<=W;x+=4){ var y=wave(x,t); x===0?ctx.moveTo(x,y):ctx.lineTo(x,y); }
+    ctx.stroke();
+    // crisp line
+    ctx.strokeStyle="#1F46FF"; ctx.lineWidth=2;
+    ctx.beginPath();
+    for(var x2=0;x2<=W;x2+=2){ var y2=wave(x2,t); x2===0?ctx.moveTo(x2,y2):ctx.lineTo(x2,y2); }
+    ctx.stroke();
+    // travelling node
+    var nx = ((t*60)%(W+80))-40, ny = wave(nx,t);
+    ctx.fillStyle="#1F46FF";
+    ctx.beginPath(); ctx.arc(nx,ny,3.5,0,Math.PI*2); ctx.fill();
+    ctx.fillStyle="rgba(31,70,255,.18)";
+    ctx.beginPath(); ctx.arc(nx,ny,9,0,Math.PI*2); ctx.fill();
+    if(!reduce){ t += 0.02; requestAnimationFrame(frame); }
+  }
+  size(); frame();
+  var to; window.addEventListener("resize", function(){ clearTimeout(to); to=setTimeout(function(){ size(); if(reduce) frame(); }, 120); });
+})();
 </script>
 </body>
 </html>
