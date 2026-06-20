@@ -49,6 +49,7 @@ import {
   PORTFOLIO_SYSTEM_PROMPT,
   buildPortfolioUserPrompt,
 } from "./signal-prompts.ts";
+import { parseStatedBias, reconcileWithBias } from "./bias-grounding.ts";
 
 export interface AgentEvents {
   onPhase?: (phase: string) => void;
@@ -106,10 +107,12 @@ export async function generateSignalReport(opts: AgentOptions): Promise<SignalRe
           parse: (t) => normalizeSignal(parseJsonLoose<RawAssetSignal>(t)),
         });
         stats.push(stat);
+        // Guarantee the stance/conviction never contradicts the user's stated bias.
+        const grounded = reconcileWithBias(parseStatedBias(primaryNotes), primaryNotes, data);
         // Lead provenance with the asset's own note (strongest grounding), then RAG chunks.
         const primarySnippet = primaryNotes.replace(/\s+/g, " ").trim().slice(0, 110);
         const sources = [primarySnippet, ...assetCtx.map(snippet)].filter(Boolean);
-        signals.push({ ...data, asset: asset.ticker, sources });
+        signals.push({ ...grounded, asset: asset.ticker, sources });
       } catch (err) {
         // Isolate per-asset failures so the report still completes.
         signals.push({
