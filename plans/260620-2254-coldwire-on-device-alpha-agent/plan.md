@@ -46,13 +46,13 @@ scripts/
 ```
 
 ## Phases & Status
-- [x] **Step 0 — Ground in real SDK**: docs read, `npm i @qvac/sdk` (v0.13.5), .d.ts mined, smoke test written.
-- [~] **Step 0 — Smoke test RUN**: downloading model, awaiting output.
-- [ ] **Phase 1 — Core**: models module, RAG, schema, agent, proof, CLI, web UI. Run e2e on sample data.
-- [ ] **CHECKPOINT 1** — STOP, show working core, await approval.
-- [ ] **Phase 2 — P2P** (delegated inference, feature-flagged, isolated).
-- [ ] **Phase 3 — Verification + reproducibility** (no-cloud test/CI grep, README, hygiene).
-- [ ] **Final — SUBMISSION_CHECKLIST.md** (human-only tasks).
+- [x] **Step 0 — Ground in real SDK**: docs read, `npm i @qvac/sdk` (v0.13.5), .d.ts mined, smoke test RUN (streamed completion, device=gpu).
+- [x] **Phase 1 — Core**: models, RAG, schema, agent, proof, CLI, web UI. Ran e2e on sample data (6 assets + portfolio).
+- [x] **Phase 1 polish — bias-grounding**: stances never contradict stated bias; verified.
+- [x] **CHECKPOINT 1** — approved (bias-grounding + proceed to P2P).
+- [x] **Phase 2 — P2P** (delegated inference, feature-flagged, `fallbackToLocal`). Verified: provider on DHT, fallback produced full report.
+- [x] **Phase 3 — Verification + reproducibility**: no-cloud guard + 13 tests + CI + README + LICENSE + hygiene.
+- [x] **Final — SUBMISSION_CHECKLIST.md** (human-only tasks, with model hashes).
 
 ## Open Questions
 - Exact deadline timezone (user says ~14:00 Vietnam 22 Jun; site shows 06:59 — likely UTC). For checklist.
