@@ -1,0 +1,28 @@
+{
+  "name": "coldwire",
+  "version": "0.1.0",
+  "description": "100% on-device private alpha agent for crypto traders. All inference runs locally via @qvac/sdk. Zero cloud.",
+  "type": "module",
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=22.17",
+    "npm": ">=10.9"
+  },
+  "bin": {
+    "coldwire": "src/cli/coldwire-cli.ts"
+  },
+  "scripts": {
+    "smoke": "node scripts/smoke-test.ts",
+    "coldwire": "node src/cli/coldwire-cli.ts",
+    "serve": "node src/server/web-server.ts",
+    "check:no-cloud": "node scripts/verify-no-cloud-endpoints.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@qvac/sdk": "*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.7.0"
+  }
+}

@@ -1,0 +1,32 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+*.tsbuildinfo
+
+# QVAC model cache / runtime workspaces (downloaded on first run, not committed)
+.qvac/
+*.gguf
+models/
+rag-workspaces/
+
+# Secrets — NEVER commit real trader data or keys
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+secrets/
+data/private/
+
+# Logs & generated proof artifacts (regenerated on demand)
+*.log
+proof/*.json
+proof/*.log
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
