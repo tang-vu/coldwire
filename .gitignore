@@ -28,6 +28,9 @@ proof/*.log
 # Vercel (project linking; not secret but machine-local)
 .vercel/
 
+# Rendered demo video (hosted on the GitHub release, not committed)
+media/*.mp4
+
 # OS / editor
 .DS_Store
 Thumbs.db
