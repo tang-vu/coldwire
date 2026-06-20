@@ -6,7 +6,11 @@
  * Run: node scripts/smoke-test.ts
  */
 
-const { loadModel, LLAMA_3_2_1B_INST_Q4_0, completion, unloadModel } = await import("@qvac/sdk");
+const sdk = await import("@qvac/sdk");
+const { loadModel, completion, unloadModel } = sdk;
+// See src/core/qvac-model-descriptors.ts for why this constant is read off the
+// module object rather than imported by name.
+const LLAMA_3_2_1B_INST_Q4_0 = (sdk as unknown as Record<string, any>).LLAMA_3_2_1B_INST_Q4_0;
 
 console.error("[smoke] loading Llama 3.2 1B (downloads on first run, then cached)...");
 
