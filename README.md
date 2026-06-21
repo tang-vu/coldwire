@@ -131,6 +131,29 @@ embeddings:  GTE_LARGE_FP16
 
 ---
 
+## Remote network use (full list)
+
+The app makes **no cloud inference calls**. The only network activity is:
+
+1. **Model download (one-time):** `@qvac/sdk` fetches the model weights from the QVAC
+   model registry on first run into `~/.qvac/models`, and sha256-validates them.
+2. **P2P DHT (optional):** only when you pass `--delegate`, the Holepunch/Hyperswarm DHT
+   is used to reach a trusted peer. Off by default.
+
+No third-party LLM/embedding APIs are used anywhere. Enforced by `npm run check:no-cloud`.
+
+## Audit log
+
+Every run writes a structured audit log to `proof/coldwire-proof-<timestamp>.json`, capturing:
+
+- **Model lifecycle** — load/unload events per model, with timings (ms).
+- **Per inference call** — prompt preview + prompt chars/tokens, generated tokens,
+  **TTFT (ms)**, **tokens/sec**, and the **backend device** (cpu/gpu).
+- The full QVAC profiler export.
+
+A sample from one real demo run is committed at
+[`docs/sample-on-device-run.json`](./docs/sample-on-device-run.json).
+
 ## Sample-data walkthrough
 
 `data/sample/` ships **synthetic** (fake) trader data so the repo runs with no

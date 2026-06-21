@@ -1,0 +1,3152 @@
+{
+  "note": "All embeddings and completions ran locally on this device via @qvac/sdk. No cloud inference. The only network use is the SDK's one-time model download.",
+  "onDevice": true,
+  "host": "DESKTOP-1A6OPC9",
+  "generatedAt": "2026-06-21T12:35:47.954Z",
+  "llmModel": "LLAMA_3_2_1B_INST_Q4_0",
+  "embedModel": "GTE_LARGE_FP16",
+  "delegatedTo": null,
+  "auditLog": {
+    "modelEvents": [
+      {
+        "event": "load",
+        "model": "GTE_LARGE_FP16",
+        "ms": 26055
+      },
+      {
+        "event": "load",
+        "model": "LLAMA_3_2_1B_INST_Q4_0",
+        "ms": 7473,
+        "delegated": false
+      },
+      {
+        "event": "unload",
+        "model": "LLAMA_3_2_1B_INST_Q4_0",
+        "ms": 158
+      },
+      {
+        "event": "unload",
+        "model": "GTE_LARGE_FP16",
+        "ms": 149
+      }
+    ],
+    "inferenceCalls": [
+      {
+        "label": "signal:BTC",
+        "promptPreview": "Score the asset BTC (Bitcoin). MY NOTES ON BTC (PRIMARY — weight these above everything else): ## Position 2 — BTC (long spot) - Size: 0.65 BTC, avg entry 61,20",
+        "promptChars": 7207,
+        "promptTokens": 2058,
+        "generatedTokens": 97,
+        "ttftMs": 2848.0950000000003,
+        "tokensPerSecond": 43.68812444179414,
+        "device": "gpu"
+      },
+      {
+        "label": "signal:ETH",
+        "promptPreview": "Score the asset ETH (Ethereum). MY NOTES ON ETH (PRIMARY — weight these above everything else): ## Position 3 — ETH (long spot) - Size: 4.0 ETH, avg entry 3,420",
+        "promptChars": 7819,
+        "promptTokens": 2265,
+        "generatedTokens": 103,
+        "ttftMs": 2402.346,
+        "tokensPerSecond": 41.57903447830422,
+        "device": "gpu"
+      },
+      {
+        "label": "signal:SOL",
+        "promptPreview": "Score the asset SOL (Solana). MY NOTES ON SOL (PRIMARY — weight these above everything else): ## Position 1 — SOL (long spot) - Size: 220 SOL, avg entry 128.40,",
+        "promptChars": 7297,
+        "promptTokens": 2076,
+        "generatedTokens": 111,
+        "ttftMs": 2139.457,
+        "tokensPerSecond": 44.491438805032104,
+        "device": "gpu"
+      },
+      {
+        "label": "signal:LINK",
+        "promptPreview": "Score the asset LINK (Chainlink). MY NOTES ON LINK (PRIMARY — weight these above everything else): ## LINK — Chainlink - Bias: accumulate on weakness. Slow move",
+        "promptChars": 6964,
+        "promptTokens": 1973,
+        "generatedTokens": 88,
+        "ttftMs": 2046.991,
+        "tokensPerSecond": 45.17755291677576,
+        "device": "gpu"
+      },
+      {
+        "label": "signal:ARB",
+        "promptPreview": "Score the asset ARB (Arbitrum). MY NOTES ON ARB (PRIMARY — weight these above everything else): ## Position 4 — ARB (tactical long) - Size: 6,000 ARB, avg entry",
+        "promptChars": 7155,
+        "promptTokens": 2057,
+        "generatedTokens": 109,
+        "ttftMs": 2119.833,
+        "tokensPerSecond": 44.25186537851787,
+        "device": "gpu"
+      },
+      {
+        "label": "signal:DOGE",
+        "promptPreview": "Score the asset DOGE (Dogecoin). MY NOTES ON DOGE (PRIMARY — weight these above everything else): ## DOGE — Dogecoin - Bias: avoid / pure sentiment play. On wat",
+        "promptChars": 6888,
+        "promptTokens": 1913,
+        "generatedTokens": 112,
+        "ttftMs": 1893.77,
+        "tokensPerSecond": 45.61400936553356,
+        "device": "gpu"
+      },
+      {
+        "label": "portfolio",
+        "promptPreview": "Review MY portfolio against MY rules and surface the most important issues. MY STRATEGY & RISK RULES (caps and limits): [1] scoring > and risk commentary in MY ",
+        "promptChars": 4744,
+        "promptTokens": 1441,
+        "generatedTokens": 91,
+        "ttftMs": 1415.239,
+        "tokensPerSecond": 53.05110920541681,
+        "device": "gpu"
+      }
+    ]
+  },
+  "inferenceStats": [
+    {
+      "label": "signal:BTC",
+      "backendDevice": "gpu",
+      "tokensPerSecond": 43.68812444179414,
+      "promptTokens": 2058,
+      "generatedTokens": 97,
+      "timeToFirstTokenMs": 2848.0950000000003
+    },
+    {
+      "label": "signal:ETH",
+      "backendDevice": "gpu",
+      "tokensPerSecond": 41.57903447830422,
+      "promptTokens": 2265,
+      "generatedTokens": 103,
+      "timeToFirstTokenMs": 2402.346
+    },
+    {
+      "label": "signal:SOL",
+      "backendDevice": "gpu",
+      "tokensPerSecond": 44.491438805032104,
+      "promptTokens": 2076,
+      "generatedTokens": 111,
+      "timeToFirstTokenMs": 2139.457
+    },
+    {
+      "label": "signal:LINK",
+      "backendDevice": "gpu",
+      "tokensPerSecond": 45.17755291677576,
+      "promptTokens": 1973,
+      "generatedTokens": 88,
+      "timeToFirstTokenMs": 2046.991
+    },
+    {
+      "label": "signal:ARB",
+      "backendDevice": "gpu",
+      "tokensPerSecond": 44.25186537851787,
+      "promptTokens": 2057,
+      "generatedTokens": 109,
+      "timeToFirstTokenMs": 2119.833
+    },
+    {
+      "label": "signal:DOGE",
+      "backendDevice": "gpu",
+      "tokensPerSecond": 45.61400936553356,
+      "promptTokens": 1913,
+      "generatedTokens": 112,
+      "timeToFirstTokenMs": 1893.77
+    },
+    {
+      "label": "portfolio",
+      "backendDevice": "gpu",
+      "tokensPerSecond": 53.05110920541681,
+      "promptTokens": 1441,
+      "generatedTokens": 91,
+      "timeToFirstTokenMs": 1415.239
+    }
+  ],
+  "profiler": {
+    "config": {
+      "enabled": true,
+      "mode": "verbose",
+      "includeServerBreakdown": true,
+      "operationFilters": [],
+      "maxRecentEvents": 1000
+    },
+    "aggregates": {
+      "rpc.connection": {
+        "count": 1,
+        "min": 20391.793400000002,
+        "max": 20391.793400000002,
+        "avg": 20391.793400000002,
+        "sum": 20391.793400000002,
+        "last": 20391.793400000002
+      },
+      "loadModel.request.zodValidation": {
+        "count": 2,
+        "min": 0.18559999999706633,
+        "max": 10.03559999999925,
+        "avg": 5.110599999998158,
+        "sum": 10.221199999996315,
+        "last": 0.18559999999706633
+      },
+      "loadModel.request.stringify": {
+        "count": 2,
+        "min": 0.011600000001635635,
+        "max": 0.017299999999522697,
+        "avg": 0.014450000000579166,
+        "sum": 0.028900000001158332,
+        "last": 0.017299999999522697
+      },
+      "loadModel.request.totalSerialization": {
+        "count": 2,
+        "min": 0.20289999999658903,
+        "max": 10.047200000000885,
+        "avg": 5.125049999998737,
+        "sum": 10.250099999997474,
+        "last": 0.20289999999658903
+      },
+      "loadModel.ttfb": {
+        "count": 2,
+        "min": 4294.171999999999,
+        "max": 5099.653499999997,
+        "avg": 4696.912749999998,
+        "sum": 9393.825499999995,
+        "last": 5099.653499999997
+      },
+      "loadModel.streamDuration": {
+        "count": 2,
+        "min": 1349.6219999999994,
+        "max": 2370.7051000000065,
+        "avg": 1860.163550000003,
+        "sum": 3720.327100000006,
+        "last": 2370.7051000000065
+      },
+      "loadModel.totalClientTime": {
+        "count": 2,
+        "min": 5654.816900000002,
+        "max": 7470.7307999999975,
+        "avg": 6562.77385,
+        "sum": 13125.5477,
+        "last": 7470.7307999999975
+      },
+      "loadModel.server.request.jsonParse": {
+        "count": 2,
+        "min": 0,
+        "max": 0,
+        "avg": 0,
+        "sum": 0,
+        "last": 0
+      },
+      "loadModel.server.request.zodValidation": {
+        "count": 2,
+        "min": 1,
+        "max": 8,
+        "avg": 4.5,
+        "sum": 9,
+        "last": 1
+      },
+      "loadModel.server.handlerExecution": {
+        "count": 2,
+        "min": 5629,
+        "max": 7468,
+        "avg": 6548.5,
+        "sum": 13097,
+        "last": 7468
+      },
+      "loadModel.server.response.zodValidation": {
+        "count": 2,
+        "min": 0,
+        "max": 3,
+        "avg": 1.5,
+        "sum": 3,
+        "last": 0
+      },
+      "loadModel.server.response.stringify": {
+        "count": 2,
+        "min": 0,
+        "max": 0,
+        "avg": 0,
+        "sum": 0,
+        "last": 0
+      },
+      "loadModel.server.totalServerTime": {
+        "count": 2,
+        "min": 5639,
+        "max": 7469,
+        "avg": 6554,
+        "sum": 13108,
+        "last": 7469
+      },
+      "loadModel": {
+        "count": 2,
+        "min": 5626,
+        "max": 7467,
+        "avg": 6546.5,
+        "sum": 13093,
+        "last": 7467
+      },
+      "loadModel.checksumValidationTime": {
+        "count": 2,
+        "min": 4267,
+        "max": 5092,
+        "avg": 4679.5,
+        "sum": 9359,
+        "last": 5092
+      },
+      "loadModel.totalLoadTime": {
+        "count": 2,
+        "min": 5626,
+        "max": 7467,
+        "avg": 6546.5,
+        "sum": 13093,
+        "last": 7467
+      },
+      "loadModel.modelInitializationTime": {
+        "count": 2,
+        "min": 1343,
+        "max": 2369,
+        "avg": 1856,
+        "sum": 3712,
+        "last": 2369
+      },
+      "rag.request.zodValidation": {
+        "count": 9,
+        "min": 0.7048999999969965,
+        "max": 18.09209999999439,
+        "avg": 3.3472888888888215,
+        "sum": 30.125599999999395,
+        "last": 1.9418000000005122
+      },
+      "rag.request.stringify": {
+        "count": 9,
+        "min": 0.007700000001932494,
+        "max": 0.05550000000221189,
+        "avg": 0.016822222223304886,
+        "sum": 0.15140000000974396,
+        "last": 0.007700000001932494
+      },
+      "rag.request.totalSerialization": {
+        "count": 9,
+        "min": 0.7160999999905471,
+        "max": 18.1475999999966,
+        "avg": 3.3641111111121265,
+        "sum": 30.27700000000914,
+        "last": 1.9495000000024447
+      },
+      "rag.serverWait": {
+        "count": 9,
+        "min": 35.38610000000335,
+        "max": 3441.2121999999945,
+        "avg": 418.77698888889023,
+        "sum": 3768.992900000012,
+        "last": 55.687000000005355
+      },
+      "rag.response.jsonParse": {
+        "count": 9,
+        "min": 0.03239999999641441,
+        "max": 0.10489999999845168,
+        "avg": 0.0550444444452296,
+        "sum": 0.4954000000070664,
+        "last": 0.04080000000249129
+      },
+      "rag.response.zodValidation": {
+        "count": 9,
+        "min": 0.03939999999420252,
+        "max": 1.8033999999970547,
+        "avg": 0.465155555554601,
+        "sum": 4.1863999999914085,
+        "last": 0.5639999999984866
+      },
+      "rag.response.totalParsing": {
+        "count": 9,
+        "min": 0.07179999999061693,
+        "max": 1.9082999999955064,
+        "avg": 0.5201999999998306,
+        "sum": 4.681799999998475,
+        "last": 0.6048000000009779
+      },
+      "rag.totalClientTime": {
+        "count": 9,
+        "min": 36.20350000000326,
+        "max": 3461.6589999999997,
+        "avg": 422.7642777777785,
+        "sum": 3804.878500000006,
+        "last": 58.345000000001164
+      },
+      "rag.server.request.jsonParse": {
+        "count": 9,
+        "min": 0,
+        "max": 1,
+        "avg": 0.1111111111111111,
+        "sum": 1,
+        "last": 0
+      },
+      "rag.server.request.zodValidation": {
+        "count": 9,
+        "min": 0,
+        "max": 30,
+        "avg": 4.555555555555555,
+        "sum": 41,
+        "last": 3
+      },
+      "rag.server.handlerExecution": {
+        "count": 9,
+        "min": 34,
+        "max": 3408,
+        "avg": 412.6666666666667,
+        "sum": 3714,
+        "last": 51
+      },
+      "rag.server.response.zodValidation": {
+        "count": 9,
+        "min": 0,
+        "max": 1,
+        "avg": 0.4444444444444444,
+        "sum": 4,
+        "last": 1
+      },
+      "rag.server.response.stringify": {
+        "count": 9,
+        "min": 0,
+        "max": 1,
+        "avg": 0.1111111111111111,
+        "sum": 1,
+        "last": 0
+      },
+      "rag.server.totalServerTime": {
+        "count": 9,
+        "min": 34,
+        "max": 3439,
+        "avg": 417.77777777777777,
+        "sum": 3760,
+        "last": 55
+      },
+      "rag.clientOverhead": {
+        "count": 9,
+        "min": 1.206399999995483,
+        "max": 22.65899999999965,
+        "avg": 4.986500000000685,
+        "sum": 44.87850000000617,
+        "last": 3.345000000001164
+      },
+      "rag": {
+        "count": 9,
+        "min": 34,
+        "max": 3407,
+        "avg": 412.44444444444446,
+        "sum": 3712,
+        "last": 51
+      },
+      "rag.processed": {
+        "count": 1,
+        "min": 10,
+        "max": 10,
+        "avg": 10,
+        "sum": 10,
+        "last": 10
+      },
+      "rag.resultsCount": {
+        "count": 7,
+        "min": 3,
+        "max": 3,
+        "avg": 3,
+        "sum": 21,
+        "last": 3
+      },
+      "completionStream.request.zodValidation": {
+        "count": 7,
+        "min": 0.2925000000104774,
+        "max": 2.979399999996531,
+        "avg": 0.9822285714305637,
+        "sum": 6.8756000000139466,
+        "last": 0.42020000000775326
+      },
+      "completionStream.request.stringify": {
+        "count": 7,
+        "min": 0.0356000000028871,
+        "max": 0.1194000000032247,
+        "avg": 0.06518571428854816,
+        "sum": 0.45630000001983717,
+        "last": 0.0356000000028871
+      },
+      "completionStream.request.totalSerialization": {
+        "count": 7,
+        "min": 0.34200000001874287,
+        "max": 3.047500000000582,
+        "avg": 1.047414285719112,
+        "sum": 7.331900000033784,
+        "last": 0.45580000001064036
+      },
+      "completionStream.ttfb": {
+        "count": 14,
+        "min": 1610,
+        "max": 3029.678200000002,
+        "avg": 2289.7968785714293,
+        "sum": 32057.15630000001,
+        "last": 1610
+      },
+      "completionStream.streamDuration": {
+        "count": 7,
+        "min": 1920.7691999999952,
+        "max": 2723.9608000000007,
+        "avg": 2435.2243142857146,
+        "sum": 17046.570200000002,
+        "last": 1920.7691999999952
+      },
+      "completionStream.totalClientTime": {
+        "count": 7,
+        "min": 3533.2752000000037,
+        "max": 5366.719799999999,
+        "avg": 4732.309442857143,
+        "sum": 33126.1661,
+        "last": 3533.2752000000037
+      },
+      "completionStream.server.request.jsonParse": {
+        "count": 7,
+        "min": 0,
+        "max": 1,
+        "avg": 0.14285714285714285,
+        "sum": 1,
+        "last": 0
+      },
+      "completionStream.server.request.zodValidation": {
+        "count": 7,
+        "min": 0,
+        "max": 2,
+        "avg": 0.7142857142857143,
+        "sum": 5,
+        "last": 1
+      },
+      "completionStream.server.handlerExecution": {
+        "count": 7,
+        "min": 3530,
+        "max": 5351,
+        "avg": 4719.285714285715,
+        "sum": 33035,
+        "last": 3530
+      },
+      "completionStream.server.response.zodValidation": {
+        "count": 7,
+        "min": 1,
+        "max": 7,
+        "avg": 3.4285714285714284,
+        "sum": 24,
+        "last": 4
+      },
+      "completionStream.server.response.stringify": {
+        "count": 7,
+        "min": 0,
+        "max": 2,
+        "avg": 0.7142857142857143,
+        "sum": 5,
+        "last": 1
+      },
+      "completionStream.server.totalServerTime": {
+        "count": 7,
+        "min": 3532,
+        "max": 5357,
+        "avg": 4721.142857142857,
+        "sum": 33048,
+        "last": 3532
+      },
+      "completionStream": {
+        "count": 7,
+        "min": 3530,
+        "max": 5350,
+        "avg": 4719,
+        "sum": 33033,
+        "last": 3530
+      },
+      "completionStream.modelExecutionTime": {
+        "count": 7,
+        "min": 3530,
+        "max": 5347,
+        "avg": 4718.142857142857,
+        "sum": 33027,
+        "last": 3530
+      },
+      "unloadModel.request.zodValidation": {
+        "count": 2,
+        "min": 0.2353000000002794,
+        "max": 0.4878000000026077,
+        "avg": 0.36155000000144355,
+        "sum": 0.7231000000028871,
+        "last": 0.2353000000002794
+      },
+      "unloadModel.request.stringify": {
+        "count": 2,
+        "min": 0.007500000006984919,
+        "max": 0.00810000000637956,
+        "avg": 0.0078000000066822395,
+        "sum": 0.015600000013364479,
+        "last": 0.00810000000637956
+      },
+      "unloadModel.request.totalSerialization": {
+        "count": 2,
+        "min": 0.24340000000665896,
+        "max": 0.4953000000095926,
+        "avg": 0.3693500000081258,
+        "sum": 0.7387000000162516,
+        "last": 0.24340000000665896
+      },
+      "unloadModel.serverWait": {
+        "count": 2,
+        "min": 69.29770000001008,
+        "max": 156.35289999999804,
+        "avg": 112.82530000000406,
+        "sum": 225.65060000000813,
+        "last": 69.29770000001008
+      },
+      "unloadModel.response.jsonParse": {
+        "count": 2,
+        "min": 0.011400000003050081,
+        "max": 0.021200000002863817,
+        "avg": 0.01630000000295695,
+        "sum": 0.0326000000059139,
+        "last": 0.011400000003050081
+      },
+      "unloadModel.response.zodValidation": {
+        "count": 2,
+        "min": 0.019400000004679896,
+        "max": 0.3468999999895459,
+        "avg": 0.1831499999971129,
+        "sum": 0.3662999999942258,
+        "last": 0.019400000004679896
+      },
+      "unloadModel.response.totalParsing": {
+        "count": 2,
+        "min": 0.030800000007729977,
+        "max": 0.3680999999924097,
+        "avg": 0.19945000000006985,
+        "sum": 0.3989000000001397,
+        "last": 0.030800000007729977
+      },
+      "unloadModel.totalClientTime": {
+        "count": 2,
+        "min": 69.60540000000037,
+        "max": 157.25779999999213,
+        "avg": 113.43159999999625,
+        "sum": 226.8631999999925,
+        "last": 69.60540000000037
+      },
+      "unloadModel.server.request.jsonParse": {
+        "count": 2,
+        "min": 0,
+        "max": 0,
+        "avg": 0,
+        "sum": 0,
+        "last": 0
+      },
+      "unloadModel.server.request.zodValidation": {
+        "count": 2,
+        "min": 0,
+        "max": 1,
+        "avg": 0.5,
+        "sum": 1,
+        "last": 0
+      },
+      "unloadModel.server.handlerExecution": {
+        "count": 2,
+        "min": 69,
+        "max": 154,
+        "avg": 111.5,
+        "sum": 223,
+        "last": 69
+      },
+      "unloadModel.server.response.zodValidation": {
+        "count": 2,
+        "min": 0,
+        "max": 1,
+        "avg": 0.5,
+        "sum": 1,
+        "last": 0
+      },
+      "unloadModel.server.response.stringify": {
+        "count": 2,
+        "min": 0,
+        "max": 0,
+        "avg": 0,
+        "sum": 0,
+        "last": 0
+      },
+      "unloadModel.server.totalServerTime": {
+        "count": 2,
+        "min": 69,
+        "max": 156,
+        "avg": 112.5,
+        "sum": 225,
+        "last": 69
+      },
+      "unloadModel.clientOverhead": {
+        "count": 2,
+        "min": 0.6054000000003725,
+        "max": 1.2577999999921303,
+        "avg": 0.9315999999962514,
+        "sum": 1.8631999999925029,
+        "last": 0.6054000000003725
+      }
+    },
+    "exportedAt": 77086.425,
+    "recentEvents": [
+      {
+        "ts": 26669.8104,
+        "op": "rpc",
+        "kind": "rpc",
+        "phase": "connection",
+        "ms": 20391.793400000002
+      },
+      {
+        "ts": 32325.4379,
+        "op": "loadModel",
+        "kind": "rpc",
+        "profileId": "mqnrrc3z-4yxjhv",
+        "phase": "request.zodValidation",
+        "ms": 10.03559999999925
+      },
+      {
+        "ts": 32325.4379,
+        "op": "loadModel",
+        "kind": "rpc",
+        "profileId": "mqnrrc3z-4yxjhv",
+        "phase": "request.stringify",
+        "ms": 0.011600000001635635
+      },
+      {
+        "ts": 32325.4379,
+        "op": "loadModel",
+        "kind": "rpc",
+        "profileId": "mqnrrc3z-4yxjhv",
+        "phase": "request.totalSerialization",
+        "ms": 10.047200000000885
+      },
+      {
+        "ts": 32325.4379,
+        "op": "loadModel",
+        "kind": "rpc",
+        "profileId": "mqnrrc3z-4yxjhv",
+        "phase": "ttfb",
+        "ms": 4294.171999999999
+      },
+      {
+        "ts": 32325.4379,
+        "op": "loadModel",
+        "kind": "rpc",
+        "profileId": "mqnrrc3z-4yxjhv",
+        "phase": "streamDuration",
+        "ms": 1349.6219999999994
+      },
+      {
+        "ts": 32325.4379,
+        "op": "loadModel",
+        "kind": "rpc",
+        "profileId": "mqnrrc3z-4yxjhv",
+        "phase": "totalClientTime",
+        "ms": 5654.816900000002,
+        "count": 2
+      },
+      {
+        "ts": 32325.4379,
+        "op": "loadModel",
+        "kind": "rpc",
+        "profileId": "mqnrrc3z-4yxjhv",
+        "phase": "server.request.jsonParse",
+        "ms": 0
+      },
+      {
+        "ts": 32325.4379,
+        "op": "loadModel",
+        "kind": "rpc",
+        "profileId": "mqnrrc3z-4yxjhv",
+        "phase": "server.request.zodValidation",
+        "ms": 8
+      },
+      {
+        "ts": 32325.4379,
+        "op": "loadModel",
+        "kind": "rpc",
+        "profileId": "mqnrrc3z-4yxjhv",
+        "phase": "server.handlerExecution",
+        "ms": 5629
+      },
+      {
+        "ts": 32325.4379,
+        "op": "loadModel",
+        "kind": "rpc",
+        "profileId": "mqnrrc3z-4yxjhv",
+        "phase": "server.response.zodValidation",
+        "ms": 3
+      },
+      {
+        "ts": 32325.4379,
+        "op": "loadModel",
+        "kind": "rpc",
+        "profileId": "mqnrrc3z-4yxjhv",
+        "phase": "server.response.stringify",
+        "ms": 0
+      },
+      {
+        "ts": 32325.4379,
+        "op": "loadModel",
+        "kind": "rpc",
+        "profileId": "mqnrrc3z-4yxjhv",
+        "phase": "server.totalServerTime",
+        "ms": 5639
+      },
+      {
+        "ts": 32325.9347,
+        "op": "loadModel",
+        "kind": "handler",
+        "ms": 5626,
+        "profileId": "mqnrrc3z-4yxjhv",
+        "gauges": {
+          "checksumValidationTime": 4267,
+          "totalLoadTime": 5626,
+          "modelInitializationTime": 1343
+        },
+        "tags": {
+          "cacheHit": "true",
+          "sourceType": "registry",
+          "modelType": "llamacpp-embedding"
+        }
+      },
+      {
+        "ts": 39798.8359,
+        "op": "loadModel",
+        "kind": "rpc",
+        "profileId": "mqnrrgh5-02unwr",
+        "phase": "request.zodValidation",
+        "ms": 0.18559999999706633
+      },
+      {
+        "ts": 39798.8359,
+        "op": "loadModel",
+        "kind": "rpc",
+        "profileId": "mqnrrgh5-02unwr",
+        "phase": "request.stringify",
+        "ms": 0.017299999999522697
+      },
+      {
+        "ts": 39798.8359,
+        "op": "loadModel",
+        "kind": "rpc",
+        "profileId": "mqnrrgh5-02unwr",
+        "phase": "request.totalSerialization",
+        "ms": 0.20289999999658903
+      },
+      {
+        "ts": 39798.8359,
+        "op": "loadModel",
+        "kind": "rpc",
+        "profileId": "mqnrrgh5-02unwr",
+        "phase": "ttfb",
+        "ms": 5099.653499999997
+      },
+      {
+        "ts": 39798.8359,
+        "op": "loadModel",
+        "kind": "rpc",
+        "profileId": "mqnrrgh5-02unwr",
+        "phase": "streamDuration",
+        "ms": 2370.7051000000065
+      },
+      {
+        "ts": 39798.8359,
+        "op": "loadModel",
+        "kind": "rpc",
+        "profileId": "mqnrrgh5-02unwr",
+        "phase": "totalClientTime",
+        "ms": 7470.7307999999975,
+        "count": 2
+      },
+      {
+        "ts": 39798.8359,
+        "op": "loadModel",
+        "kind": "rpc",
+        "profileId": "mqnrrgh5-02unwr",
+        "phase": "server.request.jsonParse",
+        "ms": 0
+      },
+      {
+        "ts": 39798.8359,
+        "op": "loadModel",
+        "kind": "rpc",
+        "profileId": "mqnrrgh5-02unwr",
+        "phase": "server.request.zodValidation",
+        "ms": 1
+      },
+      {
+        "ts": 39798.8359,
+        "op": "loadModel",
+        "kind": "rpc",
+        "profileId": "mqnrrgh5-02unwr",
+        "phase": "server.handlerExecution",
+        "ms": 7468
+      },
+      {
+        "ts": 39798.8359,
+        "op": "loadModel",
+        "kind": "rpc",
+        "profileId": "mqnrrgh5-02unwr",
+        "phase": "server.response.zodValidation",
+        "ms": 0
+      },
+      {
+        "ts": 39798.8359,
+        "op": "loadModel",
+        "kind": "rpc",
+        "profileId": "mqnrrgh5-02unwr",
+        "phase": "server.response.stringify",
+        "ms": 0
+      },
+      {
+        "ts": 39798.8359,
+        "op": "loadModel",
+        "kind": "rpc",
+        "profileId": "mqnrrgh5-02unwr",
+        "phase": "server.totalServerTime",
+        "ms": 7469
+      },
+      {
+        "ts": 39798.9339,
+        "op": "loadModel",
+        "kind": "handler",
+        "ms": 7467,
+        "profileId": "mqnrrgh5-02unwr",
+        "gauges": {
+          "checksumValidationTime": 5092,
+          "totalLoadTime": 7467,
+          "modelInitializationTime": 2369
+        },
+        "tags": {
+          "cacheHit": "true",
+          "sourceType": "registry",
+          "modelType": "llamacpp-completion"
+        }
+      },
+      {
+        "ts": 43265.2554,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrrm8s-2yszd2",
+        "phase": "request.zodValidation",
+        "ms": 18.09209999999439
+      },
+      {
+        "ts": 43265.2554,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrrm8s-2yszd2",
+        "phase": "request.stringify",
+        "ms": 0.05550000000221189
+      },
+      {
+        "ts": 43265.2554,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrrm8s-2yszd2",
+        "phase": "request.totalSerialization",
+        "ms": 18.1475999999966
+      },
+      {
+        "ts": 43265.2554,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrrm8s-2yszd2",
+        "phase": "serverWait",
+        "ms": 3441.2121999999945
+      },
+      {
+        "ts": 43265.2554,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrrm8s-2yszd2",
+        "phase": "response.jsonParse",
+        "ms": 0.10489999999845168
+      },
+      {
+        "ts": 43265.2554,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrrm8s-2yszd2",
+        "phase": "response.zodValidation",
+        "ms": 1.8033999999970547
+      },
+      {
+        "ts": 43265.2554,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrrm8s-2yszd2",
+        "phase": "response.totalParsing",
+        "ms": 1.9082999999955064
+      },
+      {
+        "ts": 43265.2554,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrrm8s-2yszd2",
+        "phase": "totalClientTime",
+        "ms": 3461.6589999999997
+      },
+      {
+        "ts": 43265.2554,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrrm8s-2yszd2",
+        "phase": "server.request.jsonParse",
+        "ms": 1
+      },
+      {
+        "ts": 43265.2554,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrrm8s-2yszd2",
+        "phase": "server.request.zodValidation",
+        "ms": 30
+      },
+      {
+        "ts": 43265.2554,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrrm8s-2yszd2",
+        "phase": "server.handlerExecution",
+        "ms": 3408
+      },
+      {
+        "ts": 43265.2554,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrrm8s-2yszd2",
+        "phase": "server.response.zodValidation",
+        "ms": 1
+      },
+      {
+        "ts": 43265.2554,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrrm8s-2yszd2",
+        "phase": "server.response.stringify",
+        "ms": 0
+      },
+      {
+        "ts": 43265.2554,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrrm8s-2yszd2",
+        "phase": "server.totalServerTime",
+        "ms": 3439
+      },
+      {
+        "ts": 43265.2554,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrrm8s-2yszd2",
+        "phase": "clientOverhead",
+        "ms": 22.65899999999965
+      },
+      {
+        "ts": 43265.3983,
+        "op": "rag",
+        "kind": "handler",
+        "ms": 3407,
+        "profileId": "mqnrrma6-zkix6s",
+        "gauges": {
+          "processed": 10
+        },
+        "tags": {
+          "operation": "ingest",
+          "workspace": "coldwire-private"
+        }
+      },
+      {
+        "ts": 43315.803,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrrowz-v9luho",
+        "phase": "request.zodValidation",
+        "ms": 3.657999999995809
+      },
+      {
+        "ts": 43315.803,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrrowz-v9luho",
+        "phase": "request.stringify",
+        "ms": 0.018199999998614658
+      },
+      {
+        "ts": 43315.803,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrrowz-v9luho",
+        "phase": "request.totalSerialization",
+        "ms": 3.6761999999944237
+      },
+      {
+        "ts": 43315.803,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrrowz-v9luho",
+        "phase": "serverWait",
+        "ms": 44.64410000000498
+      },
+      {
+        "ts": 43315.803,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrrowz-v9luho",
+        "phase": "response.jsonParse",
+        "ms": 0.0970000000015716
+      },
+      {
+        "ts": 43315.803,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrrowz-v9luho",
+        "phase": "response.zodValidation",
+        "ms": 1.4363000000012107
+      },
+      {
+        "ts": 43315.803,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrrowz-v9luho",
+        "phase": "response.totalParsing",
+        "ms": 1.5333000000027823
+      },
+      {
+        "ts": 43315.803,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrrowz-v9luho",
+        "phase": "totalClientTime",
+        "ms": 49.974600000001374
+      },
+      {
+        "ts": 43315.803,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrrowz-v9luho",
+        "phase": "server.request.jsonParse",
+        "ms": 0
+      },
+      {
+        "ts": 43315.803,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrrowz-v9luho",
+        "phase": "server.request.zodValidation",
+        "ms": 2
+      },
+      {
+        "ts": 43315.803,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrrowz-v9luho",
+        "phase": "server.handlerExecution",
+        "ms": 41
+      },
+      {
+        "ts": 43315.803,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrrowz-v9luho",
+        "phase": "server.response.zodValidation",
+        "ms": 1
+      },
+      {
+        "ts": 43315.803,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrrowz-v9luho",
+        "phase": "server.response.stringify",
+        "ms": 0
+      },
+      {
+        "ts": 43315.803,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrrowz-v9luho",
+        "phase": "server.totalServerTime",
+        "ms": 44
+      },
+      {
+        "ts": 43315.803,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrrowz-v9luho",
+        "phase": "clientOverhead",
+        "ms": 5.974600000001374
+      },
+      {
+        "ts": 43315.957,
+        "op": "rag",
+        "kind": "handler",
+        "ms": 41,
+        "profileId": "mqnrrox5-iv7oxa",
+        "gauges": {
+          "resultsCount": 3
+        },
+        "tags": {
+          "operation": "search",
+          "workspace": "coldwire-private"
+        }
+      },
+      {
+        "ts": 43357.3022,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrroyd-dvhqnl",
+        "phase": "request.zodValidation",
+        "ms": 1.7035000000032596
+      },
+      {
+        "ts": 43357.3022,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrroyd-dvhqnl",
+        "phase": "request.stringify",
+        "ms": 0.017400000004272442
+      },
+      {
+        "ts": 43357.3022,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrroyd-dvhqnl",
+        "phase": "request.totalSerialization",
+        "ms": 1.720900000007532
+      },
+      {
+        "ts": 43357.3022,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrroyd-dvhqnl",
+        "phase": "serverWait",
+        "ms": 38.97639999999956
+      },
+      {
+        "ts": 43357.3022,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrroyd-dvhqnl",
+        "phase": "response.jsonParse",
+        "ms": 0.06339999999909196
+      },
+      {
+        "ts": 43357.3022,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrroyd-dvhqnl",
+        "phase": "response.zodValidation",
+        "ms": 0.10429999999905704
+      },
+      {
+        "ts": 43357.3022,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrroyd-dvhqnl",
+        "phase": "response.totalParsing",
+        "ms": 0.167699999998149
+      },
+      {
+        "ts": 43357.3022,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrroyd-dvhqnl",
+        "phase": "totalClientTime",
+        "ms": 40.93110000000161
+      },
+      {
+        "ts": 43357.3022,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrroyd-dvhqnl",
+        "phase": "server.request.jsonParse",
+        "ms": 0
+      },
+      {
+        "ts": 43357.3022,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrroyd-dvhqnl",
+        "phase": "server.request.zodValidation",
+        "ms": 1
+      },
+      {
+        "ts": 43357.3022,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrroyd-dvhqnl",
+        "phase": "server.handlerExecution",
+        "ms": 36
+      },
+      {
+        "ts": 43357.3022,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrroyd-dvhqnl",
+        "phase": "server.response.zodValidation",
+        "ms": 0
+      },
+      {
+        "ts": 43357.3022,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrroyd-dvhqnl",
+        "phase": "server.response.stringify",
+        "ms": 1
+      },
+      {
+        "ts": 43357.3022,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrroyd-dvhqnl",
+        "phase": "server.totalServerTime",
+        "ms": 38
+      },
+      {
+        "ts": 43357.3022,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrroyd-dvhqnl",
+        "phase": "clientOverhead",
+        "ms": 2.9311000000016065
+      },
+      {
+        "ts": 43357.4412,
+        "op": "rag",
+        "kind": "handler",
+        "ms": 35,
+        "profileId": "mqnrroyh-rszsxm",
+        "gauges": {
+          "resultsCount": 3
+        },
+        "tags": {
+          "operation": "search",
+          "workspace": "coldwire-private"
+        }
+      },
+      {
+        "ts": 48727.8955,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrrozm-t25tw6",
+        "phase": "request.zodValidation",
+        "ms": 2.979399999996531
+      },
+      {
+        "ts": 48727.8955,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrrozm-t25tw6",
+        "phase": "request.stringify",
+        "ms": 0.06810000000405125
+      },
+      {
+        "ts": 48727.8955,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrrozm-t25tw6",
+        "phase": "request.totalSerialization",
+        "ms": 3.047500000000582
+      },
+      {
+        "ts": 48727.8955,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrrozm-t25tw6",
+        "phase": "ttfb",
+        "ms": 3029.678200000002
+      },
+      {
+        "ts": 48727.8955,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrrozm-t25tw6",
+        "phase": "streamDuration",
+        "ms": 2328.8893000000025
+      },
+      {
+        "ts": 48727.8955,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrrozm-t25tw6",
+        "phase": "totalClientTime",
+        "ms": 5366.719799999999,
+        "count": 99
+      },
+      {
+        "ts": 48727.8955,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrrozm-t25tw6",
+        "phase": "server.request.jsonParse",
+        "ms": 0
+      },
+      {
+        "ts": 48727.8955,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrrozm-t25tw6",
+        "phase": "server.request.zodValidation",
+        "ms": 2
+      },
+      {
+        "ts": 48727.8955,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrrozm-t25tw6",
+        "phase": "server.handlerExecution",
+        "ms": 5351
+      },
+      {
+        "ts": 48727.8955,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrrozm-t25tw6",
+        "phase": "server.response.zodValidation",
+        "ms": 7
+      },
+      {
+        "ts": 48727.8955,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrrozm-t25tw6",
+        "phase": "server.response.stringify",
+        "ms": 1
+      },
+      {
+        "ts": 48727.8955,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrrozm-t25tw6",
+        "phase": "server.totalServerTime",
+        "ms": 5357
+      },
+      {
+        "ts": 48727.9873,
+        "op": "completionStream",
+        "kind": "handler",
+        "ms": 5350,
+        "profileId": "mqnrrozt-ymjodn",
+        "gauges": {
+          "ttfb": 3024,
+          "modelExecutionTime": 5347
+        },
+        "tags": {
+          "modelId": "81e5c350f7721fec"
+        },
+        "count": 99
+      },
+      {
+        "ts": 48768.1163,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrrt4q-w65qdc",
+        "phase": "request.zodValidation",
+        "ms": 1.4088000000047032
+      },
+      {
+        "ts": 48768.1163,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrrt4q-w65qdc",
+        "phase": "request.stringify",
+        "ms": 0.010099999999511056
+      },
+      {
+        "ts": 48768.1163,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrrt4q-w65qdc",
+        "phase": "request.totalSerialization",
+        "ms": 1.4189000000042142
+      },
+      {
+        "ts": 48768.1163,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrrt4q-w65qdc",
+        "phase": "serverWait",
+        "ms": 37.119800000000396
+      },
+      {
+        "ts": 48768.1163,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrrt4q-w65qdc",
+        "phase": "response.jsonParse",
+        "ms": 0.04130000000441214
+      },
+      {
+        "ts": 48768.1163,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrrt4q-w65qdc",
+        "phase": "response.zodValidation",
+        "ms": 0.07070000000385335
+      },
+      {
+        "ts": 48768.1163,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrrt4q-w65qdc",
+        "phase": "response.totalParsing",
+        "ms": 0.11200000000826549
+      },
+      {
+        "ts": 48768.1163,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrrt4q-w65qdc",
+        "phase": "totalClientTime",
+        "ms": 38.7245000000039
+      },
+      {
+        "ts": 48768.1163,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrrt4q-w65qdc",
+        "phase": "server.request.jsonParse",
+        "ms": 0
+      },
+      {
+        "ts": 48768.1163,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrrt4q-w65qdc",
+        "phase": "server.request.zodValidation",
+        "ms": 1
+      },
+      {
+        "ts": 48768.1163,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrrt4q-w65qdc",
+        "phase": "server.handlerExecution",
+        "ms": 35
+      },
+      {
+        "ts": 48768.1163,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrrt4q-w65qdc",
+        "phase": "server.response.zodValidation",
+        "ms": 0
+      },
+      {
+        "ts": 48768.1163,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrrt4q-w65qdc",
+        "phase": "server.response.stringify",
+        "ms": 0
+      },
+      {
+        "ts": 48768.1163,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrrt4q-w65qdc",
+        "phase": "server.totalServerTime",
+        "ms": 36
+      },
+      {
+        "ts": 48768.1163,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrrt4q-w65qdc",
+        "phase": "clientOverhead",
+        "ms": 2.7245000000039
+      },
+      {
+        "ts": 48768.1898,
+        "op": "rag",
+        "kind": "handler",
+        "ms": 35,
+        "profileId": "mqnrrt4t-dj0vj8",
+        "gauges": {
+          "resultsCount": 3
+        },
+        "tags": {
+          "operation": "search",
+          "workspace": "coldwire-private"
+        }
+      },
+      {
+        "ts": 53911.5742,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrrt5u-fcaqrk",
+        "phase": "request.zodValidation",
+        "ms": 0.6728999999977532
+      },
+      {
+        "ts": 53911.5742,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrrt5u-fcaqrk",
+        "phase": "request.stringify",
+        "ms": 0.06999999999970896
+      },
+      {
+        "ts": 53911.5742,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrrt5u-fcaqrk",
+        "phase": "request.totalSerialization",
+        "ms": 0.7428999999974621
+      },
+      {
+        "ts": 53911.5742,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrrt5u-fcaqrk",
+        "phase": "ttfb",
+        "ms": 2515.445899999999
+      },
+      {
+        "ts": 53911.5742,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrrt5u-fcaqrk",
+        "phase": "streamDuration",
+        "ms": 2625.9258000000045
+      },
+      {
+        "ts": 53911.5742,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrrt5u-fcaqrk",
+        "phase": "totalClientTime",
+        "ms": 5142.980100000001,
+        "count": 105
+      },
+      {
+        "ts": 53911.5742,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrrt5u-fcaqrk",
+        "phase": "server.request.jsonParse",
+        "ms": 0
+      },
+      {
+        "ts": 53911.5742,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrrt5u-fcaqrk",
+        "phase": "server.request.zodValidation",
+        "ms": 0
+      },
+      {
+        "ts": 53911.5742,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrrt5u-fcaqrk",
+        "phase": "server.handlerExecution",
+        "ms": 5139
+      },
+      {
+        "ts": 53911.5742,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrrt5u-fcaqrk",
+        "phase": "server.response.zodValidation",
+        "ms": 4
+      },
+      {
+        "ts": 53911.5742,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrrt5u-fcaqrk",
+        "phase": "server.response.stringify",
+        "ms": 1
+      },
+      {
+        "ts": 53911.5742,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrrt5u-fcaqrk",
+        "phase": "server.totalServerTime",
+        "ms": 5140
+      },
+      {
+        "ts": 53911.658,
+        "op": "completionStream",
+        "kind": "handler",
+        "ms": 5139,
+        "profileId": "mqnrrt5v-whjlnp",
+        "gauges": {
+          "ttfb": 2514,
+          "modelExecutionTime": 5138
+        },
+        "tags": {
+          "modelId": "81e5c350f7721fec"
+        },
+        "count": 105
+      },
+      {
+        "ts": 53950.9079,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrrx4p-ytt611",
+        "phase": "request.zodValidation",
+        "ms": 0.921200000004319
+      },
+      {
+        "ts": 53950.9079,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrrx4p-ytt611",
+        "phase": "request.stringify",
+        "ms": 0.011700000002747402
+      },
+      {
+        "ts": 53950.9079,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrrx4p-ytt611",
+        "phase": "request.totalSerialization",
+        "ms": 0.9329000000070664
+      },
+      {
+        "ts": 53950.9079,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrrx4p-ytt611",
+        "phase": "serverWait",
+        "ms": 37.4291000000012
+      },
+      {
+        "ts": 53950.9079,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrrx4p-ytt611",
+        "phase": "response.jsonParse",
+        "ms": 0.038800000002083834
+      },
+      {
+        "ts": 53950.9079,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrrx4p-ytt611",
+        "phase": "response.zodValidation",
+        "ms": 0.07379999999830034
+      },
+      {
+        "ts": 53950.9079,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrrx4p-ytt611",
+        "phase": "response.totalParsing",
+        "ms": 0.11260000000038417
+      },
+      {
+        "ts": 53950.9079,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrrx4p-ytt611",
+        "phase": "totalClientTime",
+        "ms": 38.54469999999856
+      },
+      {
+        "ts": 53950.9079,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrrx4p-ytt611",
+        "phase": "server.request.jsonParse",
+        "ms": 0
+      },
+      {
+        "ts": 53950.9079,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrrx4p-ytt611",
+        "phase": "server.request.zodValidation",
+        "ms": 1
+      },
+      {
+        "ts": 53950.9079,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrrx4p-ytt611",
+        "phase": "server.handlerExecution",
+        "ms": 35
+      },
+      {
+        "ts": 53950.9079,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrrx4p-ytt611",
+        "phase": "server.response.zodValidation",
+        "ms": 0
+      },
+      {
+        "ts": 53950.9079,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrrx4p-ytt611",
+        "phase": "server.response.stringify",
+        "ms": 0
+      },
+      {
+        "ts": 53950.9079,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrrx4p-ytt611",
+        "phase": "server.totalServerTime",
+        "ms": 36
+      },
+      {
+        "ts": 53950.9079,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrrx4p-ytt611",
+        "phase": "clientOverhead",
+        "ms": 2.5446999999985565
+      },
+      {
+        "ts": 53951.0169,
+        "op": "rag",
+        "kind": "handler",
+        "ms": 35,
+        "profileId": "mqnrrx4s-46xgxt",
+        "gauges": {
+          "resultsCount": 3
+        },
+        "tags": {
+          "operation": "search",
+          "workspace": "coldwire-private"
+        }
+      },
+      {
+        "ts": 59193.8535,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrrx5s-yuyjp1",
+        "phase": "request.zodValidation",
+        "ms": 1.3588000000017928
+      },
+      {
+        "ts": 59193.8535,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrrx5s-yuyjp1",
+        "phase": "request.stringify",
+        "ms": 0.1194000000032247
+      },
+      {
+        "ts": 59193.8535,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrrx5s-yuyjp1",
+        "phase": "request.totalSerialization",
+        "ms": 1.4782000000050175
+      },
+      {
+        "ts": 59193.8535,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrrx5s-yuyjp1",
+        "phase": "ttfb",
+        "ms": 2516.203099999999
+      },
+      {
+        "ts": 59193.8535,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrrx5s-yuyjp1",
+        "phase": "streamDuration",
+        "ms": 2723.9608000000007
+      },
+      {
+        "ts": 59193.8535,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrrx5s-yuyjp1",
+        "phase": "totalClientTime",
+        "ms": 5242.291799999999,
+        "count": 113
+      },
+      {
+        "ts": 59193.8535,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrrx5s-yuyjp1",
+        "phase": "server.request.jsonParse",
+        "ms": 0
+      },
+      {
+        "ts": 59193.8535,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrrx5s-yuyjp1",
+        "phase": "server.request.zodValidation",
+        "ms": 0
+      },
+      {
+        "ts": 59193.8535,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrrx5s-yuyjp1",
+        "phase": "server.handlerExecution",
+        "ms": 5238
+      },
+      {
+        "ts": 59193.8535,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrrx5s-yuyjp1",
+        "phase": "server.response.zodValidation",
+        "ms": 3
+      },
+      {
+        "ts": 59193.8535,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrrx5s-yuyjp1",
+        "phase": "server.response.stringify",
+        "ms": 0
+      },
+      {
+        "ts": 59193.8535,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrrx5s-yuyjp1",
+        "phase": "server.totalServerTime",
+        "ms": 5239
+      },
+      {
+        "ts": 59193.93,
+        "op": "completionStream",
+        "kind": "handler",
+        "ms": 5237,
+        "profileId": "mqnrrx5w-h8f44r",
+        "gauges": {
+          "ttfb": 2513,
+          "modelExecutionTime": 5237
+        },
+        "tags": {
+          "modelId": "81e5c350f7721fec"
+        },
+        "count": 113
+      },
+      {
+        "ts": 59232.6418,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrs17f-o5xrqw",
+        "phase": "request.zodValidation",
+        "ms": 0.899199999999837
+      },
+      {
+        "ts": 59232.6418,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrs17f-o5xrqw",
+        "phase": "request.stringify",
+        "ms": 0.008200000003853347
+      },
+      {
+        "ts": 59232.6418,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrs17f-o5xrqw",
+        "phase": "request.totalSerialization",
+        "ms": 0.9074000000036904
+      },
+      {
+        "ts": 59232.6418,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrs17f-o5xrqw",
+        "phase": "serverWait",
+        "ms": 37.26440000000002
+      },
+      {
+        "ts": 59232.6418,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrs17f-o5xrqw",
+        "phase": "response.jsonParse",
+        "ms": 0.03530000000318978
+      },
+      {
+        "ts": 59232.6418,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrs17f-o5xrqw",
+        "phase": "response.zodValidation",
+        "ms": 0.04320000000006985
+      },
+      {
+        "ts": 59232.6418,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrs17f-o5xrqw",
+        "phase": "response.totalParsing",
+        "ms": 0.07850000000325963
+      },
+      {
+        "ts": 59232.6418,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrs17f-o5xrqw",
+        "phase": "totalClientTime",
+        "ms": 38.289700000001176
+      },
+      {
+        "ts": 59232.6418,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrs17f-o5xrqw",
+        "phase": "server.request.jsonParse",
+        "ms": 0
+      },
+      {
+        "ts": 59232.6418,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrs17f-o5xrqw",
+        "phase": "server.request.zodValidation",
+        "ms": 2
+      },
+      {
+        "ts": 59232.6418,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrs17f-o5xrqw",
+        "phase": "server.handlerExecution",
+        "ms": 35
+      },
+      {
+        "ts": 59232.6418,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrs17f-o5xrqw",
+        "phase": "server.response.zodValidation",
+        "ms": 0
+      },
+      {
+        "ts": 59232.6418,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrs17f-o5xrqw",
+        "phase": "server.response.stringify",
+        "ms": 0
+      },
+      {
+        "ts": 59232.6418,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrs17f-o5xrqw",
+        "phase": "server.totalServerTime",
+        "ms": 37
+      },
+      {
+        "ts": 59232.6418,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrs17f-o5xrqw",
+        "phase": "clientOverhead",
+        "ms": 1.2897000000011758
+      },
+      {
+        "ts": 59232.751,
+        "op": "rag",
+        "kind": "handler",
+        "ms": 35,
+        "profileId": "mqnrs17i-31fblf",
+        "gauges": {
+          "resultsCount": 3
+        },
+        "tags": {
+          "operation": "search",
+          "workspace": "coldwire-private"
+        }
+      },
+      {
+        "ts": 63616.5623,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrs18i-26y9gy",
+        "phase": "request.zodValidation",
+        "ms": 0.6635999999998603
+      },
+      {
+        "ts": 63616.5623,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrs18i-26y9gy",
+        "phase": "request.stringify",
+        "ms": 0.048199999997450504
+      },
+      {
+        "ts": 63616.5623,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrs18i-26y9gy",
+        "phase": "request.totalSerialization",
+        "ms": 0.7117999999973108
+      },
+      {
+        "ts": 63616.5623,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrs18i-26y9gy",
+        "phase": "ttfb",
+        "ms": 2165.920300000005
+      },
+      {
+        "ts": 63616.5623,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrs18i-26y9gy",
+        "phase": "streamDuration",
+        "ms": 2216.4805999999953
+      },
+      {
+        "ts": 63616.5623,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrs18i-26y9gy",
+        "phase": "totalClientTime",
+        "ms": 4383.521399999998,
+        "count": 90
+      },
+      {
+        "ts": 63616.5623,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrs18i-26y9gy",
+        "phase": "server.request.jsonParse",
+        "ms": 0
+      },
+      {
+        "ts": 63616.5623,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrs18i-26y9gy",
+        "phase": "server.request.zodValidation",
+        "ms": 1
+      },
+      {
+        "ts": 63616.5623,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrs18i-26y9gy",
+        "phase": "server.handlerExecution",
+        "ms": 4326
+      },
+      {
+        "ts": 63616.5623,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrs18i-26y9gy",
+        "phase": "server.response.zodValidation",
+        "ms": 2
+      },
+      {
+        "ts": 63616.5623,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrs18i-26y9gy",
+        "phase": "server.response.stringify",
+        "ms": 0
+      },
+      {
+        "ts": 63616.5623,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrs18i-26y9gy",
+        "phase": "server.totalServerTime",
+        "ms": 4327
+      },
+      {
+        "ts": 63616.6565,
+        "op": "completionStream",
+        "kind": "handler",
+        "ms": 4326,
+        "profileId": "mqnrs1a2-1dqvuo",
+        "gauges": {
+          "ttfb": 2110,
+          "modelExecutionTime": 4325
+        },
+        "tags": {
+          "modelId": "81e5c350f7721fec"
+        },
+        "count": 90
+      },
+      {
+        "ts": 63659.2181,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrs4ma-4ptjja",
+        "phase": "request.zodValidation",
+        "ms": 0.7960999999995693
+      },
+      {
+        "ts": 63659.2181,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrs4ma-4ptjja",
+        "phase": "request.stringify",
+        "ms": 0.011400000003050081
+      },
+      {
+        "ts": 63659.2181,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrs4ma-4ptjja",
+        "phase": "request.totalSerialization",
+        "ms": 0.8075000000026193
+      },
+      {
+        "ts": 63659.2181,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrs4ma-4ptjja",
+        "phase": "serverWait",
+        "ms": 41.273800000002666
+      },
+      {
+        "ts": 63659.2181,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrs4ma-4ptjja",
+        "phase": "response.jsonParse",
+        "ms": 0.041499999999359716
+      },
+      {
+        "ts": 63659.2181,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrs4ma-4ptjja",
+        "phase": "response.zodValidation",
+        "ms": 0.05129999999917345
+      },
+      {
+        "ts": 63659.2181,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrs4ma-4ptjja",
+        "phase": "response.totalParsing",
+        "ms": 0.09279999999853317
+      },
+      {
+        "ts": 63659.2181,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrs4ma-4ptjja",
+        "phase": "totalClientTime",
+        "ms": 42.20639999999548
+      },
+      {
+        "ts": 63659.2181,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrs4ma-4ptjja",
+        "phase": "server.request.jsonParse",
+        "ms": 0
+      },
+      {
+        "ts": 63659.2181,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrs4ma-4ptjja",
+        "phase": "server.request.zodValidation",
+        "ms": 1
+      },
+      {
+        "ts": 63659.2181,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrs4ma-4ptjja",
+        "phase": "server.handlerExecution",
+        "ms": 39
+      },
+      {
+        "ts": 63659.2181,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrs4ma-4ptjja",
+        "phase": "server.response.zodValidation",
+        "ms": 1
+      },
+      {
+        "ts": 63659.2181,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrs4ma-4ptjja",
+        "phase": "server.response.stringify",
+        "ms": 0
+      },
+      {
+        "ts": 63659.2181,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrs4ma-4ptjja",
+        "phase": "server.totalServerTime",
+        "ms": 41
+      },
+      {
+        "ts": 63659.2181,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrs4ma-4ptjja",
+        "phase": "clientOverhead",
+        "ms": 1.206399999995483
+      },
+      {
+        "ts": 63659.3303,
+        "op": "rag",
+        "kind": "handler",
+        "ms": 39,
+        "profileId": "mqnrs4mc-g8juk0",
+        "gauges": {
+          "resultsCount": 3
+        },
+        "tags": {
+          "operation": "search",
+          "workspace": "coldwire-private"
+        }
+      },
+      {
+        "ts": 68489.2429,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrs4nh-o9th6r",
+        "phase": "request.zodValidation",
+        "ms": 0.4881999999997788
+      },
+      {
+        "ts": 68489.2429,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrs4nh-o9th6r",
+        "phase": "request.stringify",
+        "ms": 0.06550000000424916
+      },
+      {
+        "ts": 68489.2429,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrs4nh-o9th6r",
+        "phase": "request.totalSerialization",
+        "ms": 0.553700000004028
+      },
+      {
+        "ts": 68489.2429,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrs4nh-o9th6r",
+        "phase": "ttfb",
+        "ms": 2212.745299999995
+      },
+      {
+        "ts": 68489.2429,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrs4nh-o9th6r",
+        "phase": "streamDuration",
+        "ms": 2615.814599999998
+      },
+      {
+        "ts": 68489.2429,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrs4nh-o9th6r",
+        "phase": "totalClientTime",
+        "ms": 4829.5628,
+        "count": 111
+      },
+      {
+        "ts": 68489.2429,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrs4nh-o9th6r",
+        "phase": "server.request.jsonParse",
+        "ms": 1
+      },
+      {
+        "ts": 68489.2429,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrs4nh-o9th6r",
+        "phase": "server.request.zodValidation",
+        "ms": 0
+      },
+      {
+        "ts": 68489.2429,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrs4nh-o9th6r",
+        "phase": "server.handlerExecution",
+        "ms": 4826
+      },
+      {
+        "ts": 68489.2429,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrs4nh-o9th6r",
+        "phase": "server.response.zodValidation",
+        "ms": 3
+      },
+      {
+        "ts": 68489.2429,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrs4nh-o9th6r",
+        "phase": "server.response.stringify",
+        "ms": 0
+      },
+      {
+        "ts": 68489.2429,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrs4nh-o9th6r",
+        "phase": "server.totalServerTime",
+        "ms": 4827
+      },
+      {
+        "ts": 68489.3958,
+        "op": "completionStream",
+        "kind": "handler",
+        "ms": 4826,
+        "profileId": "mqnrs4ni-2qsv2y",
+        "gauges": {
+          "ttfb": 2211,
+          "modelExecutionTime": 4825
+        },
+        "tags": {
+          "modelId": "81e5c350f7721fec"
+        },
+        "count": 111
+      },
+      {
+        "ts": 68526.0753,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrs8dn-5f7hvi",
+        "phase": "request.zodValidation",
+        "ms": 0.7048999999969965
+      },
+      {
+        "ts": 68526.0753,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrs8dn-5f7hvi",
+        "phase": "request.stringify",
+        "ms": 0.011199999993550591
+      },
+      {
+        "ts": 68526.0753,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrs8dn-5f7hvi",
+        "phase": "request.totalSerialization",
+        "ms": 0.7160999999905471
+      },
+      {
+        "ts": 68526.0753,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrs8dn-5f7hvi",
+        "phase": "serverWait",
+        "ms": 35.38610000000335
+      },
+      {
+        "ts": 68526.0753,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrs8dn-5f7hvi",
+        "phase": "response.jsonParse",
+        "ms": 0.03239999999641441
+      },
+      {
+        "ts": 68526.0753,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrs8dn-5f7hvi",
+        "phase": "response.zodValidation",
+        "ms": 0.03939999999420252
+      },
+      {
+        "ts": 68526.0753,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrs8dn-5f7hvi",
+        "phase": "response.totalParsing",
+        "ms": 0.07179999999061693
+      },
+      {
+        "ts": 68526.0753,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrs8dn-5f7hvi",
+        "phase": "totalClientTime",
+        "ms": 36.20350000000326
+      },
+      {
+        "ts": 68526.0753,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrs8dn-5f7hvi",
+        "phase": "server.request.jsonParse",
+        "ms": 0
+      },
+      {
+        "ts": 68526.0753,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrs8dn-5f7hvi",
+        "phase": "server.request.zodValidation",
+        "ms": 0
+      },
+      {
+        "ts": 68526.0753,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrs8dn-5f7hvi",
+        "phase": "server.handlerExecution",
+        "ms": 34
+      },
+      {
+        "ts": 68526.0753,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrs8dn-5f7hvi",
+        "phase": "server.response.zodValidation",
+        "ms": 0
+      },
+      {
+        "ts": 68526.0753,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrs8dn-5f7hvi",
+        "phase": "server.response.stringify",
+        "ms": 0
+      },
+      {
+        "ts": 68526.0753,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrs8dn-5f7hvi",
+        "phase": "server.totalServerTime",
+        "ms": 34
+      },
+      {
+        "ts": 68526.0753,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrs8dn-5f7hvi",
+        "phase": "clientOverhead",
+        "ms": 2.2035000000032596
+      },
+      {
+        "ts": 68526.1422,
+        "op": "rag",
+        "kind": "handler",
+        "ms": 34,
+        "profileId": "mqnrs8do-5nnus3",
+        "gauges": {
+          "resultsCount": 3
+        },
+        "tags": {
+          "operation": "search",
+          "workspace": "coldwire-private"
+        }
+      },
+      {
+        "ts": 73154.2207,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrs8eo-ff55g6",
+        "phase": "request.zodValidation",
+        "ms": 0.2925000000104774
+      },
+      {
+        "ts": 73154.2207,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrs8eo-ff55g6",
+        "phase": "request.stringify",
+        "ms": 0.04950000000826549
+      },
+      {
+        "ts": 73154.2207,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrs8eo-ff55g6",
+        "phase": "request.totalSerialization",
+        "ms": 0.34200000001874287
+      },
+      {
+        "ts": 73154.2207,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrs8eo-ff55g6",
+        "phase": "ttfb",
+        "ms": 2012.4161000000022
+      },
+      {
+        "ts": 73154.2207,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrs8eo-ff55g6",
+        "phase": "streamDuration",
+        "ms": 2614.7299000000057
+      },
+      {
+        "ts": 73154.2207,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrs8eo-ff55g6",
+        "phase": "totalClientTime",
+        "ms": 4627.815000000002,
+        "count": 114
+      },
+      {
+        "ts": 73154.2207,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrs8eo-ff55g6",
+        "phase": "server.request.jsonParse",
+        "ms": 0
+      },
+      {
+        "ts": 73154.2207,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrs8eo-ff55g6",
+        "phase": "server.request.zodValidation",
+        "ms": 1
+      },
+      {
+        "ts": 73154.2207,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrs8eo-ff55g6",
+        "phase": "server.handlerExecution",
+        "ms": 4625
+      },
+      {
+        "ts": 73154.2207,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrs8eo-ff55g6",
+        "phase": "server.response.zodValidation",
+        "ms": 1
+      },
+      {
+        "ts": 73154.2207,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrs8eo-ff55g6",
+        "phase": "server.response.stringify",
+        "ms": 2
+      },
+      {
+        "ts": 73154.2207,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrs8eo-ff55g6",
+        "phase": "server.totalServerTime",
+        "ms": 4626
+      },
+      {
+        "ts": 73154.2786,
+        "op": "completionStream",
+        "kind": "handler",
+        "ms": 4625,
+        "profileId": "mqnrs8ep-z4g6v6",
+        "gauges": {
+          "ttfb": 2011,
+          "modelExecutionTime": 4625
+        },
+        "tags": {
+          "modelId": "81e5c350f7721fec"
+        },
+        "count": 114
+      },
+      {
+        "ts": 76688.2224,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrsbz8-ug5zeu",
+        "phase": "request.zodValidation",
+        "ms": 0.42020000000775326
+      },
+      {
+        "ts": 76688.2224,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrsbz8-ug5zeu",
+        "phase": "request.stringify",
+        "ms": 0.0356000000028871
+      },
+      {
+        "ts": 76688.2224,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrsbz8-ug5zeu",
+        "phase": "request.totalSerialization",
+        "ms": 0.45580000001064036
+      },
+      {
+        "ts": 76688.2224,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrsbz8-ug5zeu",
+        "phase": "ttfb",
+        "ms": 1611.7474000000075
+      },
+      {
+        "ts": 76688.2224,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrsbz8-ug5zeu",
+        "phase": "streamDuration",
+        "ms": 1920.7691999999952
+      },
+      {
+        "ts": 76688.2224,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrsbz8-ug5zeu",
+        "phase": "totalClientTime",
+        "ms": 3533.2752000000037,
+        "count": 93
+      },
+      {
+        "ts": 76688.2224,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrsbz8-ug5zeu",
+        "phase": "server.request.jsonParse",
+        "ms": 0
+      },
+      {
+        "ts": 76688.2224,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrsbz8-ug5zeu",
+        "phase": "server.request.zodValidation",
+        "ms": 1
+      },
+      {
+        "ts": 76688.2224,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrsbz8-ug5zeu",
+        "phase": "server.handlerExecution",
+        "ms": 3530
+      },
+      {
+        "ts": 76688.2224,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrsbz8-ug5zeu",
+        "phase": "server.response.zodValidation",
+        "ms": 4
+      },
+      {
+        "ts": 76688.2224,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrsbz8-ug5zeu",
+        "phase": "server.response.stringify",
+        "ms": 1
+      },
+      {
+        "ts": 76688.2224,
+        "op": "completionStream",
+        "kind": "rpc",
+        "profileId": "mqnrsbz8-ug5zeu",
+        "phase": "server.totalServerTime",
+        "ms": 3532
+      },
+      {
+        "ts": 76688.321,
+        "op": "completionStream",
+        "kind": "handler",
+        "ms": 3530,
+        "profileId": "mqnrsbza-omv4z8",
+        "gauges": {
+          "ttfb": 1610,
+          "modelExecutionTime": 3530
+        },
+        "tags": {
+          "modelId": "81e5c350f7721fec"
+        },
+        "count": 93
+      },
+      {
+        "ts": 76777.1668,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrseq8-uo80cy",
+        "phase": "request.zodValidation",
+        "ms": 1.9418000000005122
+      },
+      {
+        "ts": 76777.1668,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrseq8-uo80cy",
+        "phase": "request.stringify",
+        "ms": 0.007700000001932494
+      },
+      {
+        "ts": 76777.1668,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrseq8-uo80cy",
+        "phase": "request.totalSerialization",
+        "ms": 1.9495000000024447
+      },
+      {
+        "ts": 76777.1668,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrseq8-uo80cy",
+        "phase": "serverWait",
+        "ms": 55.687000000005355
+      },
+      {
+        "ts": 76777.1668,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrseq8-uo80cy",
+        "phase": "response.jsonParse",
+        "ms": 0.04080000000249129
+      },
+      {
+        "ts": 76777.1668,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrseq8-uo80cy",
+        "phase": "response.zodValidation",
+        "ms": 0.5639999999984866
+      },
+      {
+        "ts": 76777.1668,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrseq8-uo80cy",
+        "phase": "response.totalParsing",
+        "ms": 0.6048000000009779
+      },
+      {
+        "ts": 76777.1668,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrseq8-uo80cy",
+        "phase": "totalClientTime",
+        "ms": 58.345000000001164
+      },
+      {
+        "ts": 76777.1668,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrseq8-uo80cy",
+        "phase": "server.request.jsonParse",
+        "ms": 0
+      },
+      {
+        "ts": 76777.1668,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrseq8-uo80cy",
+        "phase": "server.request.zodValidation",
+        "ms": 3
+      },
+      {
+        "ts": 76777.1668,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrseq8-uo80cy",
+        "phase": "server.handlerExecution",
+        "ms": 51
+      },
+      {
+        "ts": 76777.1668,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrseq8-uo80cy",
+        "phase": "server.response.zodValidation",
+        "ms": 1
+      },
+      {
+        "ts": 76777.1668,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrseq8-uo80cy",
+        "phase": "server.response.stringify",
+        "ms": 0
+      },
+      {
+        "ts": 76777.1668,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrseq8-uo80cy",
+        "phase": "server.totalServerTime",
+        "ms": 55
+      },
+      {
+        "ts": 76777.1668,
+        "op": "rag",
+        "kind": "rpc",
+        "profileId": "mqnrseq8-uo80cy",
+        "phase": "clientOverhead",
+        "ms": 3.345000000001164
+      },
+      {
+        "ts": 76777.2384,
+        "op": "rag",
+        "kind": "handler",
+        "ms": 51,
+        "profileId": "mqnrseqe-2ohpvc",
+        "tags": {
+          "operation": "closeWorkspace",
+          "workspace": "coldwire-private"
+        }
+      },
+      {
+        "ts": 76934.7607,
+        "op": "unloadModel",
+        "kind": "rpc",
+        "profileId": "mqnrserv-0kvgpt",
+        "phase": "request.zodValidation",
+        "ms": 0.4878000000026077
+      },
+      {
+        "ts": 76934.7607,
+        "op": "unloadModel",
+        "kind": "rpc",
+        "profileId": "mqnrserv-0kvgpt",
+        "phase": "request.stringify",
+        "ms": 0.007500000006984919
+      },
+      {
+        "ts": 76934.7607,
+        "op": "unloadModel",
+        "kind": "rpc",
+        "profileId": "mqnrserv-0kvgpt",
+        "phase": "request.totalSerialization",
+        "ms": 0.4953000000095926
+      },
+      {
+        "ts": 76934.7607,
+        "op": "unloadModel",
+        "kind": "rpc",
+        "profileId": "mqnrserv-0kvgpt",
+        "phase": "serverWait",
+        "ms": 156.35289999999804
+      },
+      {
+        "ts": 76934.7607,
+        "op": "unloadModel",
+        "kind": "rpc",
+        "profileId": "mqnrserv-0kvgpt",
+        "phase": "response.jsonParse",
+        "ms": 0.021200000002863817
+      },
+      {
+        "ts": 76934.7607,
+        "op": "unloadModel",
+        "kind": "rpc",
+        "profileId": "mqnrserv-0kvgpt",
+        "phase": "response.zodValidation",
+        "ms": 0.3468999999895459
+      },
+      {
+        "ts": 76934.7607,
+        "op": "unloadModel",
+        "kind": "rpc",
+        "profileId": "mqnrserv-0kvgpt",
+        "phase": "response.totalParsing",
+        "ms": 0.3680999999924097
+      },
+      {
+        "ts": 76934.7607,
+        "op": "unloadModel",
+        "kind": "rpc",
+        "profileId": "mqnrserv-0kvgpt",
+        "phase": "totalClientTime",
+        "ms": 157.25779999999213
+      },
+      {
+        "ts": 76934.7607,
+        "op": "unloadModel",
+        "kind": "rpc",
+        "profileId": "mqnrserv-0kvgpt",
+        "phase": "server.request.jsonParse",
+        "ms": 0
+      },
+      {
+        "ts": 76934.7607,
+        "op": "unloadModel",
+        "kind": "rpc",
+        "profileId": "mqnrserv-0kvgpt",
+        "phase": "server.request.zodValidation",
+        "ms": 1
+      },
+      {
+        "ts": 76934.7607,
+        "op": "unloadModel",
+        "kind": "rpc",
+        "profileId": "mqnrserv-0kvgpt",
+        "phase": "server.handlerExecution",
+        "ms": 154
+      },
+      {
+        "ts": 76934.7607,
+        "op": "unloadModel",
+        "kind": "rpc",
+        "profileId": "mqnrserv-0kvgpt",
+        "phase": "server.response.zodValidation",
+        "ms": 1
+      },
+      {
+        "ts": 76934.7607,
+        "op": "unloadModel",
+        "kind": "rpc",
+        "profileId": "mqnrserv-0kvgpt",
+        "phase": "server.response.stringify",
+        "ms": 0
+      },
+      {
+        "ts": 76934.7607,
+        "op": "unloadModel",
+        "kind": "rpc",
+        "profileId": "mqnrserv-0kvgpt",
+        "phase": "server.totalServerTime",
+        "ms": 156
+      },
+      {
+        "ts": 76934.7607,
+        "op": "unloadModel",
+        "kind": "rpc",
+        "profileId": "mqnrserv-0kvgpt",
+        "phase": "clientOverhead",
+        "ms": 1.2577999999921303
+      },
+      {
+        "ts": 77004.5317,
+        "op": "unloadModel",
+        "kind": "rpc",
+        "profileId": "mqnrsew8-jk5s5o",
+        "phase": "request.zodValidation",
+        "ms": 0.2353000000002794
+      },
+      {
+        "ts": 77004.5317,
+        "op": "unloadModel",
+        "kind": "rpc",
+        "profileId": "mqnrsew8-jk5s5o",
+        "phase": "request.stringify",
+        "ms": 0.00810000000637956
+      },
+      {
+        "ts": 77004.5317,
+        "op": "unloadModel",
+        "kind": "rpc",
+        "profileId": "mqnrsew8-jk5s5o",
+        "phase": "request.totalSerialization",
+        "ms": 0.24340000000665896
+      },
+      {
+        "ts": 77004.5317,
+        "op": "unloadModel",
+        "kind": "rpc",
+        "profileId": "mqnrsew8-jk5s5o",
+        "phase": "serverWait",
+        "ms": 69.29770000001008
+      },
+      {
+        "ts": 77004.5317,
+        "op": "unloadModel",
+        "kind": "rpc",
+        "profileId": "mqnrsew8-jk5s5o",
+        "phase": "response.jsonParse",
+        "ms": 0.011400000003050081
+      },
+      {
+        "ts": 77004.5317,
+        "op": "unloadModel",
+        "kind": "rpc",
+        "profileId": "mqnrsew8-jk5s5o",
+        "phase": "response.zodValidation",
+        "ms": 0.019400000004679896
+      },
+      {
+        "ts": 77004.5317,
+        "op": "unloadModel",
+        "kind": "rpc",
+        "profileId": "mqnrsew8-jk5s5o",
+        "phase": "response.totalParsing",
+        "ms": 0.030800000007729977
+      },
+      {
+        "ts": 77004.5317,
+        "op": "unloadModel",
+        "kind": "rpc",
+        "profileId": "mqnrsew8-jk5s5o",
+        "phase": "totalClientTime",
+        "ms": 69.60540000000037
+      },
+      {
+        "ts": 77004.5317,
+        "op": "unloadModel",
+        "kind": "rpc",
+        "profileId": "mqnrsew8-jk5s5o",
+        "phase": "server.request.jsonParse",
+        "ms": 0
+      },
+      {
+        "ts": 77004.5317,
+        "op": "unloadModel",
+        "kind": "rpc",
+        "profileId": "mqnrsew8-jk5s5o",
+        "phase": "server.request.zodValidation",
+        "ms": 0
+      },
+      {
+        "ts": 77004.5317,
+        "op": "unloadModel",
+        "kind": "rpc",
+        "profileId": "mqnrsew8-jk5s5o",
+        "phase": "server.handlerExecution",
+        "ms": 69
+      },
+      {
+        "ts": 77004.5317,
+        "op": "unloadModel",
+        "kind": "rpc",
+        "profileId": "mqnrsew8-jk5s5o",
+        "phase": "server.response.zodValidation",
+        "ms": 0
+      },
+      {
+        "ts": 77004.5317,
+        "op": "unloadModel",
+        "kind": "rpc",
+        "profileId": "mqnrsew8-jk5s5o",
+        "phase": "server.response.stringify",
+        "ms": 0
+      },
+      {
+        "ts": 77004.5317,
+        "op": "unloadModel",
+        "kind": "rpc",
+        "profileId": "mqnrsew8-jk5s5o",
+        "phase": "server.totalServerTime",
+        "ms": 69
+      },
+      {
+        "ts": 77004.5317,
+        "op": "unloadModel",
+        "kind": "rpc",
+        "profileId": "mqnrsew8-jk5s5o",
+        "phase": "clientOverhead",
+        "ms": 0.6054000000003725
+      }
+    ]
+  }
+}

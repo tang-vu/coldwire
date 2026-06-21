@@ -43,6 +43,8 @@ import {
   type RawAssetSignal,
   type PortfolioView,
   type InferenceStat,
+  type AuditModelEvent,
+  type AuditInferenceCall,
 } from "./signal-report-schema.ts";
 import {
   SIGNAL_SYSTEM_PROMPT,
@@ -72,15 +74,34 @@ export async function generateSignalReport(opts: AgentOptions): Promise<SignalRe
   const { dataDir, events } = opts;
   enableProfiler();
 
+  // Structured audit log: model lifecycle + per-call inference performance.
+  const modelEvents: AuditModelEvent[] = [];
+  const inferenceCalls: AuditInferenceCall[] = [];
+  const auditCall = (s: InferenceStat, prompt: string): AuditInferenceCall => ({
+    label: s.label,
+    promptPreview: prompt.replace(/\s+/g, " ").trim().slice(0, 160),
+    promptChars: prompt.length,
+    promptTokens: s.promptTokens,
+    generatedTokens: s.generatedTokens,
+    ttftMs: s.timeToFirstTokenMs,
+    tokensPerSecond: s.tokensPerSecond,
+    device: s.backendDevice,
+  });
+
   events?.onPhase?.("Loading embedding model (GTE-large, 1024-d)");
+  let tMs = Date.now();
   const embedId = await loadEmbedModel((p) => events?.onModelDownload?.("embeddings", p));
+  modelEvents.push({ event: "load", model: "GTE_LARGE_FP16", ms: Date.now() - tMs });
   events?.onPhase?.(
     opts.delegate
       ? "Loading LLM (Llama 3.2 1B) — delegating to peer over P2P, local fallback on"
       : "Loading LLM (Llama 3.2 1B Instruct)",
   );
+  tMs = Date.now();
   const llmId = await loadLLM((p) => events?.onModelDownload?.("llm", p), opts.delegate);
+  modelEvents.push({ event: "load", model: "LLAMA_3_2_1B_INST_Q4_0", ms: Date.now() - tMs, delegated: !!opts.delegate });
 
+  let report!: SignalReport;
   try {
     events?.onPhase?.("Reading private docs");
     const docs = await readPrivateDocs(dataDir);
@@ -103,17 +124,19 @@ export async function generateSignalReport(opts: AgentOptions): Promise<SignalRe
       events?.onAsset?.(asset.ticker, i + 1, assets.length);
       const assetCtx = await retrieveForAsset(embedId, asset);
       const primaryNotes = extractAssetNotes(docs, asset);
+      const userPrompt = buildAssetUserPrompt(asset, primaryNotes, assetCtx, rules);
       try {
         const { data, stat } = await generateStructured<RawAssetSignal>({
           llmId,
           system: SIGNAL_SYSTEM_PROMPT,
-          user: buildAssetUserPrompt(asset, primaryNotes, assetCtx, rules),
+          user: userPrompt,
           schema: ASSET_SIGNAL_JSON_SCHEMA as unknown as Record<string, unknown>,
           schemaName: "asset_signal",
           label: `signal:${asset.ticker}`,
-          parse: (t) => normalizeSignal(parseJsonLoose<RawAssetSignal>(t)),
+          parse: (raw) => normalizeSignal(parseJsonLoose<RawAssetSignal>(raw)),
         });
         stats.push(stat);
+        inferenceCalls.push(auditCall(stat, userPrompt));
         // Guarantee the stance/conviction never contradicts the user's stated bias.
         const grounded = reconcileWithBias(parseStatedBias(primaryNotes), primaryNotes, data);
         // Lead provenance with the asset's own note (strongest grounding), then RAG chunks.
@@ -141,15 +164,16 @@ export async function generateSignalReport(opts: AgentOptions): Promise<SignalRe
       const portfolioCtx = await retrievePortfolio(embedId);
       positionsText = portfolioCtx.map((c) => c.content).join("\n\n");
     }
+    const portfolioPrompt = buildPortfolioUserPrompt(rules, positionsText);
     const { data: portfolio, stat: portfolioStat } = await generateStructured<PortfolioView>({
       llmId,
       system: PORTFOLIO_SYSTEM_PROMPT,
-      user: buildPortfolioUserPrompt(rules, positionsText),
+      user: portfolioPrompt,
       schema: PORTFOLIO_VIEW_JSON_SCHEMA as unknown as Record<string, unknown>,
       schemaName: "portfolio_view",
       label: "portfolio",
-      parse: (t) => {
-        const p = parseJsonLoose<PortfolioView>(t);
+      parse: (raw) => {
+        const p = parseJsonLoose<PortfolioView>(raw);
         return {
           portfolioSummary: String(p.portfolioSummary ?? "").trim() || "No summary produced.",
           keyRisks: Array.isArray(p.keyRisks) ? p.keyRisks.map(String).filter(Boolean) : [],
@@ -157,8 +181,9 @@ export async function generateSignalReport(opts: AgentOptions): Promise<SignalRe
       },
     });
     stats.push(portfolioStat);
+    inferenceCalls.push(auditCall(portfolioStat, portfolioPrompt));
 
-    return {
+    report = {
       generatedAt: new Date().toISOString(),
       llmModel: "LLAMA_3_2_1B_INST_Q4_0",
       embedModel: "GTE_LARGE_FP16",
@@ -174,11 +199,18 @@ export async function generateSignalReport(opts: AgentOptions): Promise<SignalRe
         delegatedTo: opts.delegate
           ? `${opts.delegate.providerPublicKey.slice(0, 12)}…`
           : undefined,
+        // modelEvents is mutated again in `finally` with the unload events.
+        auditLog: { modelEvents, inferenceCalls },
       },
     };
   } finally {
     await closePrivateWorkspace(true).catch(() => {});
+    tMs = Date.now();
     await unload(llmId).catch(() => {});
+    modelEvents.push({ event: "unload", model: "LLAMA_3_2_1B_INST_Q4_0", ms: Date.now() - tMs });
+    tMs = Date.now();
     await unload(embedId).catch(() => {});
+    modelEvents.push({ event: "unload", model: "GTE_LARGE_FP16", ms: Date.now() - tMs });
   }
+  return report;
 }

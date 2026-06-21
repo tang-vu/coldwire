@@ -54,6 +54,30 @@ export interface InferenceStat {
   timeToFirstTokenMs?: number;
 }
 
+/** Structured audit log: model lifecycle + per-call inference performance. */
+export interface AuditModelEvent {
+  event: "load" | "unload";
+  model: string;
+  ms: number;
+  delegated?: boolean;
+}
+
+export interface AuditInferenceCall {
+  label: string;
+  promptPreview: string;
+  promptChars: number;
+  promptTokens?: number;
+  generatedTokens?: number;
+  ttftMs?: number;
+  tokensPerSecond?: number;
+  device?: string;
+}
+
+export interface AuditLog {
+  modelEvents: AuditModelEvent[];
+  inferenceCalls: AuditInferenceCall[];
+}
+
 export interface SignalReport {
   generatedAt: string;
   llmModel: string;
@@ -70,6 +94,8 @@ export interface SignalReport {
     profilerSummary: string;
     /** Set when the LLM was offloaded to a peer over P2P (truncated public key). */
     delegatedTo?: string;
+    /** Structured audit log of model lifecycle + inference performance. */
+    auditLog?: AuditLog;
   };
 }
 

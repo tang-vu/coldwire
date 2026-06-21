@@ -27,6 +27,7 @@ export async function writeProofArtifacts(report: SignalReport, dir = "proof"): 
     llmModel: report.llmModel,
     embedModel: report.embedModel,
     delegatedTo: report.proof.delegatedTo ?? null,
+    auditLog: report.proof.auditLog ?? null,
     inferenceStats: report.proof.stats,
     profiler: profilerJSON(),
   };
